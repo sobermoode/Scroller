@@ -58,7 +58,7 @@ class GameScene: SKScene {
         self.addChild(enemy)
         */
         enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
-        enemyLauncher.start()
+        enemyLauncher.launchEnemy()
         // enemyLauncher.delegate = self
         
         self.addChild(backgroundImage)
@@ -125,17 +125,14 @@ class GameScene: SKScene {
         
         if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
         {
-            print("There's an enemy onscreen.")
             if currentEnemy.position.x <= -currentEnemy.size.width
             {
-                print("Removing the enemy...")
                 currentEnemy.removeFromParent()
                 self.enemyLauncher.removeCurrentEnemy()
             }
         }
         else
         {
-            print("There's NOT an enemy onscreen.")
             let now = NSDate()
             if now.timeIntervalSinceDate(self.enemyLauncher.lastLaunch) > self.enemyLauncher.maxInterval
             {

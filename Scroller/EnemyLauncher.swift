@@ -16,7 +16,6 @@ struct EnemyLauncher
     let maxInterval: NSTimeInterval = 3
     let scene: GameScene?
     let player: SKSpriteNode?
-    var gameOver: Bool = false
     var currentEnemy: SKSpriteNode?
     var lastLaunch = NSDate()
     
@@ -28,32 +27,6 @@ struct EnemyLauncher
         self.player = player
     }
     
-    mutating func start()
-    {
-        /*
-        while !gameOver
-        {
-            guard self.currentEnemy == nil else
-            {
-                return
-            }
-            
-            let now = NSDate()
-            print("now: \(now), last launch: \(lastLaunch)")
-            if now.timeIntervalSinceDate(lastLaunch) < 2
-            {
-                continue
-            }
-            else
-            {
-                launchEnemy()
-            }
-        }
-        */
-        
-        self.launchEnemy()
-    }
-    
     mutating func launchEnemy()
     {
         guard let scene = self.scene,
@@ -62,7 +35,6 @@ struct EnemyLauncher
             return
         }
         
-        print("Launching a new enemy...")
         let newEnemy = SKSpriteNode(imageNamed: self.enemyImageName)
         newEnemy.xScale = self.enemyScaleFactor
         newEnemy.yScale = self.enemyScaleFactor
@@ -87,7 +59,6 @@ struct EnemyLauncher
     mutating func removeCurrentEnemy()
     {
         self.currentEnemy = nil
-        // self.lastLaunch = NSDate()
     }
 }
 
