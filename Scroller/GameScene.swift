@@ -15,6 +15,7 @@ class GameScene: SKScene {
     var spaceship: SKSpriteNode!
     var warpFactor: CGFloat = 1
     var currentTouch: UITouch?
+    var sustainedSpeed: Int = 0
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -68,6 +69,7 @@ class GameScene: SKScene {
         self.warpFactor = 1
         self.backgroundImage.speed = self.warpFactor
         self.backgroundImage2.speed = self.warpFactor
+        self.sustainedSpeed = 0
     }
    
     override func update(currentTime: CFTimeInterval) {
@@ -75,7 +77,16 @@ class GameScene: SKScene {
         
         if let currentTouch = self.currentTouch
         {
-            if currentTouch.force <= 1
+            if currentTouch.force == currentTouch.maximumPossibleForce
+            {
+                self.sustainedSpeed += 1
+                
+                if self.sustainedSpeed > 125
+                {
+                    self.warpFactor = currentTouch.force * 3
+                }
+            }
+            else if currentTouch.force <= 1
             {
                 self.warpFactor = 1
             }
