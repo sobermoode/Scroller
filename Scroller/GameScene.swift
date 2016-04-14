@@ -16,6 +16,8 @@ class GameScene: SKScene {
     var warpFactor: CGFloat = 1
     var currentTouch: UITouch?
     var sustainedSpeed: Int = 0
+    var enemyLauncher: EnemyLauncher!
+    // var currentEnemy: SKSpriteNode?
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -45,6 +47,19 @@ class GameScene: SKScene {
         self.spaceship.zRotation = -1.57
         self.spaceship.zPosition = 1
         self.spaceship.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!) + 115, y: CGRectGetMidY((self.view?.bounds)!) + (self.spaceship.size.height * 2))
+        
+        /*
+        let enemy = SKSpriteNode(imageNamed: "Enemy")
+        enemy.xScale = 1.5
+        enemy.yScale = 1.5
+        enemy.zPosition = 1
+        enemy.position.x = self.spaceship.position.x
+        enemy.position.y = self.spaceship.position.y - 100
+        self.addChild(enemy)
+        */
+        enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
+        enemyLauncher.start()
+        // enemyLauncher.delegate = self
         
         self.addChild(backgroundImage)
         self.addChild(backgroundImage2)
@@ -103,10 +118,29 @@ class GameScene: SKScene {
         {
             self.backgroundImage.position.x = self.backgroundImage2.position.x + self.backgroundImage2.size.width
         }
-        
         if self.backgroundImage2.position.x < -self.backgroundImage2.size.width
         {
             self.backgroundImage2.position.x = self.backgroundImage.position.x + self.backgroundImage.size.width
+        }
+        
+        if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
+        {
+            print("There's an enemy onscreen.")
+            if currentEnemy.position.x <= -currentEnemy.size.width
+            {
+                print("Removing the enemy...")
+                currentEnemy.removeFromParent()
+                self.enemyLauncher.removeCurrentEnemy()
+            }
+        }
+        else
+        {
+            print("There's NOT an enemy onscreen.")
+            let now = NSDate()
+            if now.timeIntervalSinceDate(self.enemyLauncher.lastLaunch) > self.enemyLauncher.maxInterval
+            {
+                self.enemyLauncher.launchEnemy()
+            }
         }
     }
 }

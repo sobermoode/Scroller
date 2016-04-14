@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81539C0D1CBF413B00F0F172 /* EnemyLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81539C0C1CBF413B00F0F172 /* EnemyLauncher.swift */; };
 		81C2C0871CBDFEB400010094 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2C0861CBDFEB400010094 /* AppDelegate.swift */; };
 		81C2C0891CBDFEB400010094 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 81C2C0881CBDFEB400010094 /* GameScene.sks */; };
 		81C2C08B1CBDFEB400010094 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2C08A1CBDFEB400010094 /* GameScene.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		81539C0C1CBF413B00F0F172 /* EnemyLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyLauncher.swift; sourceTree = "<group>"; };
 		81C2C0831CBDFEB400010094 /* Scroller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scroller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C2C0861CBDFEB400010094 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81C2C0881CBDFEB400010094 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				81C2C0861CBDFEB400010094 /* AppDelegate.swift */,
 				81C2C0881CBDFEB400010094 /* GameScene.sks */,
 				81C2C08A1CBDFEB400010094 /* GameScene.swift */,
+				81539C0C1CBF413B00F0F172 /* EnemyLauncher.swift */,
 				81C2C08C1CBDFEB400010094 /* GameViewController.swift */,
 				81C2C08E1CBDFEB400010094 /* Main.storyboard */,
 				81C2C0911CBDFEB400010094 /* Assets.xcassets */,
@@ -145,6 +148,7 @@
 			files = (
 				81C2C08B1CBDFEB400010094 /* GameScene.swift in Sources */,
 				81C2C08D1CBDFEB400010094 /* GameViewController.swift in Sources */,
+				81539C0D1CBF413B00F0F172 /* EnemyLauncher.swift in Sources */,
 				81C2C0871CBDFEB400010094 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,6 +299,7 @@
 				81C2C09B1CBDFEB400010094 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
