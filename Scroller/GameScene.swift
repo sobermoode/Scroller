@@ -42,21 +42,12 @@ class GameScene: SKScene {
         let continuousScroll = SKAction.repeatActionForever(backgroundScroll)
         
         self.spaceship = SKSpriteNode(imageNamed: "Spaceship")
-        self.spaceship.xScale = 0.35
+        self.spaceship.xScale = 0.20
         self.spaceship.yScale = 0.35
         self.spaceship.zRotation = -1.57
         self.spaceship.zPosition = 1
         self.spaceship.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!) + 115, y: CGRectGetMidY((self.view?.bounds)!) + (self.spaceship.size.height * 2))
         
-        /*
-        let enemy = SKSpriteNode(imageNamed: "Enemy")
-        enemy.xScale = 1.5
-        enemy.yScale = 1.5
-        enemy.zPosition = 1
-        enemy.position.x = self.spaceship.position.x
-        enemy.position.y = self.spaceship.position.y - 100
-        self.addChild(enemy)
-        */
         enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
         enemyLauncher.launchEnemy()
         // enemyLauncher.delegate = self
@@ -74,7 +65,20 @@ class GameScene: SKScene {
         
         if let touch = touches.first
         {
+            guard self.spaceship.containsPoint(touch.locationInNode(self)) else
+            {
+                return
+            }
+            
             self.currentTouch = touch
+        }
+    }
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
+        if let currentTouch = self.currentTouch
+        {
+            self.spaceship.position = currentTouch.locationInNode(self)
         }
     }
     
