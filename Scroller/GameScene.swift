@@ -121,6 +121,11 @@ class GameScene: SKScene {
             
             self.backgroundImage.speed = self.warpFactor
             self.backgroundImage2.speed = self.warpFactor
+            
+            if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
+            {
+                currentEnemy.speed = self.warpFactor
+            }
         }
         
         if self.backgroundImage.position.x < -self.backgroundImage.size.width

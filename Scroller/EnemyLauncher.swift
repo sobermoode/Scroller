@@ -39,7 +39,7 @@ struct EnemyLauncher
         newEnemy.xScale = self.enemyScaleFactor
         newEnemy.yScale = self.enemyScaleFactor
         newEnemy.zPosition = 1
-        newEnemy.position.x = CGRectGetMaxX((self.scene?.view?.bounds)!) + newEnemy.size.width + 1
+        newEnemy.position.x = CGRectGetMaxX((self.scene?.view?.bounds)!) * 1.5
         newEnemy.position.y = player.position.y
         
         let enemyMove = SKAction.moveToX(-newEnemy.size.width, duration: 7)
