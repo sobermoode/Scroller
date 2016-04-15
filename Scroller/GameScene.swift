@@ -46,6 +46,11 @@ class GameScene: SKScene {
         self.spaceship.yScale = 0.35
         self.spaceship.zRotation = -1.57
         self.spaceship.zPosition = 1
+        let xRange = SKRange(lowerLimit: CGRectGetMinX((self.view?.bounds)!), upperLimit: CGRectGetMaxX((self.view?.bounds)!) * 3.2)
+        let yRange = SKRange(lowerLimit: CGRectGetMinY((self.view?.bounds)!), upperLimit: CGRectGetMaxY((self.view?.bounds)!) * 2.7)
+        let xConstraint = SKConstraint.positionX(xRange)
+        let yConstraint = SKConstraint.positionY(yRange)
+        self.spaceship.constraints = [xConstraint, yConstraint]
         self.spaceship.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!) + 115, y: CGRectGetMidY((self.view?.bounds)!) + (self.spaceship.size.height * 2))
         
         enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
