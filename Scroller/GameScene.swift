@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var backgroundImage: SKSpriteNode!
     var backgroundImage2: SKSpriteNode!
@@ -20,6 +20,12 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        
+        let spaceshipCategory: UInt32 = 0x1 << 0
+        let enemyCategory: UInt32 = 0x1 << 1
+        
+        self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
+        self.physicsWorld.contactDelegate = self
         
         self.backgroundImage = SKSpriteNode(imageNamed: "Background")
         // let xFactor: CGFloat = ((self.view?.bounds.width)! / self.backgroundImage.size.width)
@@ -50,6 +56,11 @@ class GameScene: SKScene {
         let xConstraint = SKConstraint.positionX(xRange)
         let yConstraint = SKConstraint.positionY(yRange)
         self.spaceship.constraints = [xConstraint, yConstraint]
+        self.spaceship.physicsBody = SKPhysicsBody(rectangleOfSize: self.spaceship.size)
+        // self.spaceship.physicsBody?.dynamic = false
+        self.spaceship.physicsBody?.categoryBitMask = spaceshipCategory
+        self.spaceship.physicsBody?.contactTestBitMask = enemyCategory
+        // self.spaceship.physicsBody?.collisionBitMask = enemyCategory | spaceshipCategory
         self.spaceship.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!) + 115, y: CGRectGetMidY((self.view?.bounds)!) + (self.spaceship.size.height * 2))
         
         enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
@@ -152,5 +163,10 @@ class GameScene: SKScene {
                 self.enemyLauncher.launchEnemy()
             }
         }
+    }
+    
+    func didBeginContact(contact: SKPhysicsContact)
+    {
+        print("Spaceship hit an enemy!!!")
     }
 }

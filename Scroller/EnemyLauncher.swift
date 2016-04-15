@@ -18,6 +18,8 @@ struct EnemyLauncher
     let player: SKSpriteNode?
     var currentEnemy: SKSpriteNode?
     var lastLaunch = NSDate()
+    let spaceshipCategory: UInt32 = 0x1 << 0
+    let enemyCategory: UInt32 = 0x1 << 1
     
     // var delegate: EnemyRemoverDelegate?
     
@@ -41,6 +43,11 @@ struct EnemyLauncher
         newEnemy.zPosition = 1
         newEnemy.position.x = CGRectGetMaxX((self.scene?.view?.bounds)!) * 1.5
         newEnemy.position.y = player.position.y
+        newEnemy.physicsBody = SKPhysicsBody(circleOfRadius: newEnemy.size.width / 2)
+        // newEnemy.physicsBody?.dynamic = false
+        newEnemy.physicsBody?.categoryBitMask = self.enemyCategory
+        newEnemy.physicsBody?.contactTestBitMask = self.spaceshipCategory
+        // newEnemy.physicsBody?.collisionBitMask = self.spaceshipCategory | self.enemyCategory
         
         let enemyMove = SKAction.moveToX(-newEnemy.size.width, duration: 7)
         newEnemy.runAction(enemyMove)
