@@ -17,7 +17,6 @@ class GameScene: SKScene {
     var currentTouch: UITouch?
     var sustainedSpeed: Int = 0
     var enemyLauncher: EnemyLauncher!
-    // var currentEnemy: SKSpriteNode?
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
