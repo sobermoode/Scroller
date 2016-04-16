@@ -37,53 +37,10 @@ struct EnemyLauncher
             return
         }
         
-        /*
-        let newEnemy = SKSpriteNode(imageNamed: self.enemyImageName)
-        newEnemy.xScale = self.enemyScaleFactor
-        newEnemy.yScale = self.enemyScaleFactor
-        newEnemy.zPosition = 1
-        newEnemy.position.x = CGRectGetMaxX((self.scene?.view?.bounds)!) * 1.5
-        newEnemy.position.y = player.position.y
-        newEnemy.physicsBody = SKPhysicsBody(circleOfRadius: newEnemy.size.width / 2)
-        // newEnemy.physicsBody?.dynamic = false
-        newEnemy.physicsBody?.categoryBitMask = self.enemyCategory
-        newEnemy.physicsBody?.contactTestBitMask = self.spaceshipCategory
-        newEnemy.physicsBody?.collisionBitMask = 0
-        
-        let enemyMove = SKAction.moveToX(-newEnemy.size.width, duration: 7)
-        newEnemy.runAction(enemyMove)
-        
-        scene.addChild(newEnemy)
-        */
-        
-        let topGate = SKSpriteNode(imageNamed: self.enemyImageName)
-        topGate.xScale = self.enemyScaleFactor
-        topGate.yScale = self.enemyScaleFactor
-        topGate.zPosition = 1
-        topGate.position.x = CGRectGetMaxX((self.scene?.view?.bounds)!) * 1.5
-        topGate.position.y = player.position.y
-        topGate.physicsBody = SKPhysicsBody(circleOfRadius: topGate.size.width / 2)
-        topGate.physicsBody?.categoryBitMask = self.enemyCategory
-        topGate.physicsBody?.contactTestBitMask = self.spaceshipCategory
-        topGate.physicsBody?.collisionBitMask = 0
-        let topGateMove = SKAction.moveToX(-topGate.size.width, duration: 7)
-        topGate.runAction(topGateMove)
-        
-        let bottomGate = SKSpriteNode(imageNamed: self.enemyImageName)
-        bottomGate.xScale = self.enemyScaleFactor
-        bottomGate.yScale = self.enemyScaleFactor
-        bottomGate.zPosition = 1
-        bottomGate.position.x = CGRectGetMaxX((self.scene?.view?.bounds)!) * 1.5
-        bottomGate.position.y = topGate.position.y - topGate.size.height - player.size.height + 15
-        bottomGate.physicsBody = SKPhysicsBody(circleOfRadius: bottomGate.size.width / 2)
-        bottomGate.physicsBody?.categoryBitMask = self.enemyCategory
-        bottomGate.physicsBody?.contactTestBitMask = self.spaceshipCategory
-        bottomGate.physicsBody?.collisionBitMask = 0
-        let bottomGateMove = SKAction.moveToX(-bottomGate.size.width, duration: 7)
-        bottomGate.runAction(bottomGateMove)
-        
-        scene.addChild(topGate)
-        scene.addChild(bottomGate)
+        let newGate = Gate()
+        newGate.position.x = CGRectGetMaxX((self.scene?.view?.bounds)!) * 1.5
+        newGate.position.y = player.position.y
+        scene.addChild(newGate)
         
         // self.currentEnemy = newEnemy
         self.lastLaunch = NSDate()
