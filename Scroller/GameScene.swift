@@ -60,7 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // self.spaceship.physicsBody?.dynamic = false
         self.spaceship.physicsBody?.categoryBitMask = spaceshipCategory
         self.spaceship.physicsBody?.contactTestBitMask = enemyCategory
-        // self.spaceship.physicsBody?.collisionBitMask = enemyCategory | spaceshipCategory
+        self.spaceship.physicsBody?.collisionBitMask = 0
         self.spaceship.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!) + 115, y: CGRectGetMidY((self.view?.bounds)!) + (self.spaceship.size.height * 2))
         
         enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)

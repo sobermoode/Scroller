@@ -47,7 +47,7 @@ struct EnemyLauncher
         // newEnemy.physicsBody?.dynamic = false
         newEnemy.physicsBody?.categoryBitMask = self.enemyCategory
         newEnemy.physicsBody?.contactTestBitMask = self.spaceshipCategory
-        // newEnemy.physicsBody?.collisionBitMask = self.spaceshipCategory | self.enemyCategory
+        newEnemy.physicsBody?.collisionBitMask = 0
         
         let enemyMove = SKAction.moveToX(-newEnemy.size.width, duration: 7)
         newEnemy.runAction(enemyMove)
