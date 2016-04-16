@@ -51,6 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.spaceship.yScale = 0.35
         self.spaceship.zRotation = -1.57
         self.spaceship.zPosition = 1
+        // print("spaceship size: \(spaceship.size)")
         let xRange = SKRange(lowerLimit: CGRectGetMinX((self.view?.bounds)!), upperLimit: CGRectGetMaxX((self.view?.bounds)!) * 3.2)
         let yRange = SKRange(lowerLimit: CGRectGetMinY((self.view?.bounds)!), upperLimit: CGRectGetMaxY((self.view?.bounds)!) * 2.7)
         let xConstraint = SKConstraint.positionX(xRange)
