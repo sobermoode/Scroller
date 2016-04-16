@@ -24,13 +24,13 @@ class Gate: SKNode
         self.gateTop.xScale = self.scaleFactor
         self.gateTop.yScale = self.scaleFactor
         self.gateTop.position = CGPointZero
-        self.target.size = CGSize(width: self.gateTop.size.width, height: 125)
+        self.target.size = CGSize(width: self.gateTop.size.width, height: 95)
         self.target.position.x = self.gateTop.position.x
-        self.target.position.y = self.gateTop.position.y + self.gateTop.size.height + 1
+        self.target.position.y = self.gateTop.position.y - self.gateTop.size.height - 1
         self.gateBottom.xScale = self.scaleFactor
         self.gateBottom.yScale = self.scaleFactor
         self.gateBottom.position.x = self.gateTop.position.x
-        self.gateBottom.position.y = self.target.position.y + self.target.size.height + 1
+        self.gateBottom.position.y = self.target.position.y - self.target.size.height - 1
         
         let totalWidth = self.gateTop.size.width
         let totalHeight = self.gateTop.size.height + self.target.size.height + self.gateBottom.size.height
@@ -40,8 +40,10 @@ class Gate: SKNode
         self.physicsBody?.contactTestBitMask = self.spaceshipCategory
         self.physicsBody?.collisionBitMask = 0
         
-        let gateMove = SKAction.moveToX(-self.frame.size.width, duration: 7)
-        self.runAction(gateMove)
+        let gateMove = SKAction.moveToX((-self.frame.width * 1.5), duration: 7)
+        let gateRemoval = SKAction.removeFromParent()
+        let gateSequence = SKAction.sequence([gateMove, gateRemoval])
+        self.runAction(gateSequence)
         
         self.zPosition = 1
         
