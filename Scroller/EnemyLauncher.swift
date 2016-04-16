@@ -18,8 +18,6 @@ struct EnemyLauncher
     let player: SKSpriteNode?
     var currentEnemy: SKSpriteNode?
     var lastLaunch = NSDate()
-    let spaceshipCategory: UInt32 = 0x1 << 0
-    let enemyCategory: UInt32 = 0x1 << 1
     
     // var delegate: EnemyRemoverDelegate?
     
@@ -42,7 +40,6 @@ struct EnemyLauncher
         newGate.position.y = player.position.y
         scene.addChild(newGate)
         
-        // self.currentEnemy = newEnemy
         self.lastLaunch = NSDate()
     }
     

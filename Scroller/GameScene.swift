@@ -18,12 +18,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var sustainedSpeed: Int = 0
     var enemyLauncher: EnemyLauncher!
     
-    override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-        
-        let spaceshipCategory: UInt32 = 0x1 << 0
-        let enemyCategory: UInt32 = 0x1 << 1
-        
+    override func didMoveToView(view: SKView)
+    {
         self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
         self.physicsWorld.contactDelegate = self
         
@@ -58,10 +54,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let yConstraint = SKConstraint.positionY(yRange)
         self.spaceship.constraints = [xConstraint, yConstraint]
         self.spaceship.physicsBody = SKPhysicsBody(rectangleOfSize: self.spaceship.size)
-        // self.spaceship.physicsBody?.dynamic = false
-        self.spaceship.physicsBody?.categoryBitMask = spaceshipCategory
-        self.spaceship.physicsBody?.contactTestBitMask = enemyCategory
+        self.spaceship.physicsBody?.categoryBitMask = SKNode.ContactCategory.Spaceship // spaceshipCategory
+        self.spaceship.physicsBody?.contactTestBitMask = SKNode.ContactCategory.Gate | SKNode.ContactCategory.Target // enemyCategory
         self.spaceship.physicsBody?.collisionBitMask = 0
+        self.spaceship.physicsBody?.usesPreciseCollisionDetection = true
         self.spaceship.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!) + 115, y: CGRectGetMidY((self.view?.bounds)!) + (self.spaceship.size.height * 2))
         
         enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
@@ -76,9 +72,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.backgroundImage2.runAction(continuousScroll)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-       /* Called when a touch begins */
-        
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
         if let touch = touches.first
         {
             guard self.spaceship.containsPoint(touch.locationInNode(self)) else
@@ -107,9 +102,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.sustainedSpeed = 0
     }
    
-    override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
-        
+    override func update(currentTime: CFTimeInterval)
+    {
         if let currentTouch = self.currentTouch
         {
             if currentTouch.force == currentTouch.maximumPossibleForce
@@ -168,6 +162,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact)
     {
-        print("Spaceship hit an enemy!!!")
+        var gateObject: SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask
+        {
+            gateObject = contact.bodyA
+        }
+        else
+        {
+            gateObject = contact.bodyB
+        }
+        
+        if gateObject.categoryBitMask == SKNode.ContactCategory.Gate
+        {
+            print("Game over!!!")
+        }
+        else if gateObject.categoryBitMask == SKNode.ContactCategory.Target
+        {
+            print("Score!!!")
+        }
     }
 }

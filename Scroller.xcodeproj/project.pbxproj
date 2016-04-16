@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8146CF1B1CC1C35100CBE863 /* Gate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8146CF1A1CC1C35100CBE863 /* Gate.swift */; };
+		8146CF1D1CC2C36900CBE863 /* ContactCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8146CF1C1CC2C36900CBE863 /* ContactCategory.swift */; };
 		81539C0D1CBF413B00F0F172 /* EnemyLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81539C0C1CBF413B00F0F172 /* EnemyLauncher.swift */; };
 		81C2C0871CBDFEB400010094 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2C0861CBDFEB400010094 /* AppDelegate.swift */; };
 		81C2C0891CBDFEB400010094 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 81C2C0881CBDFEB400010094 /* GameScene.sks */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		8146CF1A1CC1C35100CBE863 /* Gate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gate.swift; sourceTree = "<group>"; };
+		8146CF1C1CC2C36900CBE863 /* ContactCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCategory.swift; sourceTree = "<group>"; };
 		81539C0C1CBF413B00F0F172 /* EnemyLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyLauncher.swift; sourceTree = "<group>"; };
 		81C2C0831CBDFEB400010094 /* Scroller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scroller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C2C0861CBDFEB400010094 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				81C2C08A1CBDFEB400010094 /* GameScene.swift */,
 				81539C0C1CBF413B00F0F172 /* EnemyLauncher.swift */,
 				8146CF1A1CC1C35100CBE863 /* Gate.swift */,
+				8146CF1C1CC2C36900CBE863 /* ContactCategory.swift */,
 				81C2C08C1CBDFEB400010094 /* GameViewController.swift */,
 				81C2C08E1CBDFEB400010094 /* Main.storyboard */,
 				81C2C0911CBDFEB400010094 /* Assets.xcassets */,
@@ -153,6 +156,7 @@
 				8146CF1B1CC1C35100CBE863 /* Gate.swift in Sources */,
 				81C2C08D1CBDFEB400010094 /* GameViewController.swift in Sources */,
 				81539C0D1CBF413B00F0F172 /* EnemyLauncher.swift in Sources */,
+				8146CF1D1CC2C36900CBE863 /* ContactCategory.swift in Sources */,
 				81C2C0871CBDFEB400010094 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

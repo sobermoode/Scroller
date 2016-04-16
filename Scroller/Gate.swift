@@ -14,8 +14,6 @@ class Gate: SKNode
     let target = SKSpriteNode(color: UIColor.clearColor(), size: CGSizeZero)
     let gateBottom = SKSpriteNode(imageNamed: "Enemy")
     let scaleFactor: CGFloat = 1.5
-    let spaceshipCategory: UInt32 = 0x1 << 0
-    let enemyCategory: UInt32 = 0x1 << 1
     
     override init()
     {
@@ -32,13 +30,21 @@ class Gate: SKNode
         self.gateBottom.position.x = self.gateTop.position.x
         self.gateBottom.position.y = self.target.position.y - self.target.size.height - 1
         
-        let totalWidth = self.gateTop.size.width
-        let totalHeight = self.gateTop.size.height + self.target.size.height + self.gateBottom.size.height
-        let gateSize = CGSize(width: totalWidth, height: totalHeight)
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: gateSize)
-        self.physicsBody?.categoryBitMask = self.enemyCategory
-        self.physicsBody?.contactTestBitMask = self.spaceshipCategory
-        self.physicsBody?.collisionBitMask = 0
+        self.gateTop.physicsBody = SKPhysicsBody(circleOfRadius: self.gateTop.size.width / 2)
+        self.gateTop.physicsBody?.categoryBitMask = SKNode.ContactCategory.Gate
+        self.gateTop.physicsBody?.contactTestBitMask = SKNode.ContactCategory.Spaceship
+        self.gateTop.physicsBody?.collisionBitMask = SKNode.ContactCategory.None
+        self.gateTop.physicsBody?.usesPreciseCollisionDetection = true
+        self.target.physicsBody = SKPhysicsBody(rectangleOfSize: self.target.size)
+        self.target.physicsBody?.categoryBitMask = SKNode.ContactCategory.Target
+        self.target.physicsBody?.contactTestBitMask = SKNode.ContactCategory.Spaceship
+        self.target.physicsBody?.collisionBitMask = SKNode.ContactCategory.None
+        self.target.physicsBody?.usesPreciseCollisionDetection = true
+        self.gateBottom.physicsBody = SKPhysicsBody(circleOfRadius: self.gateBottom.size.width / 2)
+        self.gateBottom.physicsBody?.categoryBitMask = SKNode.ContactCategory.Gate
+        self.gateBottom.physicsBody?.contactTestBitMask = SKNode.ContactCategory.Spaceship
+        self.gateBottom.physicsBody?.collisionBitMask = SKNode.ContactCategory.None
+        self.gateBottom.physicsBody?.usesPreciseCollisionDetection = true
         
         let gateMove = SKAction.moveToX((-self.frame.width * 1.5), duration: 7)
         let gateRemoval = SKAction.removeFromParent()
