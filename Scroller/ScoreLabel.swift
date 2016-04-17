@@ -15,6 +15,10 @@ class ScoreLabel: SKNode
     let scoreText = SKLabelNode(text: "Score:")
     let score = SKLabelNode(text: "0,000,000")
     var total: Int = 0
+    var currentScore: Int
+    {
+        return total
+    }
     
     override init()
     {

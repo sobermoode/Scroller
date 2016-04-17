@@ -20,6 +20,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreLabel = ScoreLabel()
     let screenRect: CGRect = UIScreen.mainScreen().bounds
     
+    override init(size: CGSize)
+    {
+        super.init(size: size)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func didMoveToView(view: SKView)
     {
         self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
@@ -31,15 +40,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.backgroundImage = SKSpriteNode(imageNamed: "Background")
         // let xFactor: CGFloat = ((self.view?.bounds.width)! / self.backgroundImage.size.width)
         // let yFactor: CGFloat = ((self.view?.bounds.height)! / self.backgroundImage.size.height)
-        self.backgroundImage.xScale =  3.2
-        self.backgroundImage.yScale =  2.7
+        // self.backgroundImage.xScale =  3.2
+        // self.backgroundImage.yScale =  2.7
         self.backgroundImage.anchorPoint = CGPoint(x: 0, y: 0.0)
         self.backgroundImage.zPosition = 0
         self.backgroundImage.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!), y: CGRectGetMinY((self.view?.bounds)!))
         
         self.backgroundImage2 = SKSpriteNode(imageNamed: "Background")
-        self.backgroundImage2.xScale = 3.2
-        self.backgroundImage2.yScale = 2.7
+        // self.backgroundImage2.xScale = 3.2
+        // self.backgroundImage2.yScale = 2.7
         self.backgroundImage2.anchorPoint = CGPoint(x: 0, y: 0.0)
         self.backgroundImage2.zPosition = 0
         self.backgroundImage2.position = CGPoint(x: self.backgroundImage.size.width, y: self.backgroundImage.position.y)
@@ -179,7 +188,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if gateObject.categoryBitMask == SKNode.ContactCategory.Gate
         {
-            print("Game over!!!")
+            // print("Game over!!!")
+            self.gameOver()
         }
         else if gateObject.categoryBitMask == SKNode.ContactCategory.Target
         {
@@ -187,5 +197,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             self.scoreLabel.increaseScore(points)
         }
+    }
+    
+    func gameOver()
+    {
+        let transition = SKTransition.flipHorizontalWithDuration(0.5)
+        let scene = GameOverScene(size: self.size, score: self.scoreLabel.currentScore)
+        self.view?.presentScene(scene, transition: transition)
     }
 }
