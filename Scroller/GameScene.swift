@@ -61,20 +61,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.spaceship.yScale = 0.225
         self.spaceship.zRotation = -1.57
         self.spaceship.zPosition = 1
-        let xRange = SKRange(lowerLimit: CGRectGetMinX(self.screenRect) + ((self.spaceship.size.width / 2) * 1.6), upperLimit: CGRectGetMaxX(self.screenRect))
-        let yRange = SKRange(lowerLimit: CGRectGetMinY(self.screenRect), upperLimit: CGRectGetMaxY(self.screenRect) * 2.7)
+        let xRange = SKRange(lowerLimit: CGRectGetMinX(self.screenRect) + (self.spaceship.size.width / 2), upperLimit: CGRectGetMaxX(self.screenRect) - (self.spaceship.size.width / 2))
+        let yRange = SKRange(lowerLimit: CGRectGetMinY(self.screenRect) + (self.spaceship.size.height / 2), upperLimit: CGRectGetMaxY(self.screenRect) - (self.spaceship.size.height / 2))
         let xConstraint = SKConstraint.positionX(xRange)
         let yConstraint = SKConstraint.positionY(yRange)
         self.spaceship.constraints = [xConstraint, yConstraint]
         self.spaceship.physicsBody = SKPhysicsBody(rectangleOfSize: self.spaceship.size)
-        self.spaceship.physicsBody?.categoryBitMask = SKNode.ContactCategory.Spaceship // spaceshipCategory
-        self.spaceship.physicsBody?.contactTestBitMask = SKNode.ContactCategory.Gate | SKNode.ContactCategory.Target // enemyCategory
+        self.spaceship.physicsBody?.categoryBitMask = SKNode.ContactCategory.Spaceship
+        self.spaceship.physicsBody?.contactTestBitMask = SKNode.ContactCategory.Gate | SKNode.ContactCategory.Target
         self.spaceship.physicsBody?.collisionBitMask = 0
         self.spaceship.physicsBody?.usesPreciseCollisionDetection = true
         self.spaceship.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!) + 115, y: CGRectGetMidY((self.view?.bounds)!))
         
-        enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
-        enemyLauncher.launchEnemy()
+        // enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
+        // enemyLauncher.launchEnemy()
         
         self.addChild(self.scoreLabel)
         self.addChild(self.backgroundImage)
@@ -140,10 +140,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.backgroundImage.speed = self.warpFactor
             self.backgroundImage2.speed = self.warpFactor
             
-            if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
-            {
-                currentEnemy.speed = self.warpFactor
-            }
+//            if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
+//            {
+//                currentEnemy.speed = self.warpFactor
+//            }
         }
         
         if self.backgroundImage.position.x < -self.backgroundImage.size.width
@@ -155,22 +155,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.backgroundImage2.position.x = self.backgroundImage.position.x + self.backgroundImage.size.width
         }
         
-        if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
-        {
-            if currentEnemy.position.x <= -currentEnemy.size.width
-            {
-                currentEnemy.removeFromParent()
-                self.enemyLauncher.removeCurrentEnemy()
-            }
-        }
-        else
-        {
-            let now = NSDate()
-            if now.timeIntervalSinceDate(self.enemyLauncher.lastLaunch) > self.enemyLauncher.maxInterval
-            {
-                self.enemyLauncher.launchEnemy()
-            }
-        }
+//        if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
+//        {
+//            if currentEnemy.position.x <= -currentEnemy.size.width
+//            {
+//                currentEnemy.removeFromParent()
+//                self.enemyLauncher.removeCurrentEnemy()
+//            }
+//        }
+//        else
+//        {
+//            let now = NSDate()
+//            if now.timeIntervalSinceDate(self.enemyLauncher.lastLaunch) > self.enemyLauncher.maxInterval
+//            {
+//                self.enemyLauncher.launchEnemy()
+//            }
+//        }
     }
     
     func didBeginContact(contact: SKPhysicsContact)
