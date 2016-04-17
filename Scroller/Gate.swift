@@ -61,4 +61,9 @@ class Gate: SKNode
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func halfHeightOfGateCap() -> CGFloat
+    {
+        return self.gateTop.size.height / 2
+    }
 }
