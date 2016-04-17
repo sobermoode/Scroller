@@ -18,8 +18,6 @@ struct EnemyLauncher
     var currentEnemy: SKSpriteNode?
     var lastLaunch = NSDate()
     
-    // var delegate: EnemyRemoverDelegate?
-    
     init(scene: GameScene, player: SKSpriteNode)
     {
         self.scene = scene
@@ -36,7 +34,6 @@ struct EnemyLauncher
         
         let newGate = Gate()
         let yRange = SKRange(lowerLimit: CGRectGetMinY((self.scene?.view?.bounds)!) - newGate.frame.size.height, upperLimit: CGRectGetMaxY((self.scene?.view?.bounds)!) * 2.7)
-        print("yRange: \(yRange)")
         let yConstraint = SKConstraint.positionY(yRange)
         newGate.constraints = [yConstraint]
         newGate.position.x = CGRectGetMaxX((self.scene?.view?.bounds)!) * 1.5
@@ -55,9 +52,4 @@ struct EnemyLauncher
     {
         self.currentEnemy = nil
     }
-}
-
-protocol EnemyRemoverDelegate
-{
-    func removeEnemyFromScene(scene: SKScene?)
 }
