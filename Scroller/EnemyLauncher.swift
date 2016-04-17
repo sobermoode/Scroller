@@ -33,11 +33,17 @@ struct EnemyLauncher
         }
         
         let newGate = Gate()
-        let yRange = SKRange(lowerLimit: CGRectGetMinY(self.screenRect) + (newGate.frame.size.height * 2), upperLimit: CGRectGetMaxY(self.screenRect) - (newGate.halfHeightOfGateCap()))
+        print("newGate height: \(newGate.calculateAccumulatedFrame().height)")
+        let yRange = SKRange(lowerLimit: CGRectGetMinY(self.screenRect) + (newGate.calculateAccumulatedFrame().height), upperLimit: CGRectGetMaxY(self.screenRect) - (newGate.halfHeightOfGateCap()))
+        print("yRange: \(yRange)")
         let yConstraint = SKConstraint.positionY(yRange)
         newGate.constraints = [yConstraint]
+        
         newGate.position.x = CGRectGetMaxX(self.screenRect) + newGate.calculateAccumulatedFrame().width
-        newGate.position.y = player.position.y
+        let randoRange: UInt32 = UInt32(yRange.upperLimit) - UInt32(yRange.lowerLimit )
+        let randoY: CGFloat = CGFloat(arc4random_uniform(randoRange) + UInt32(yRange.lowerLimit))
+        newGate.position.y = randoY // player.position.y
+        
         scene.addChild(newGate)
         
         self.lastLaunch = NSDate()
