@@ -34,8 +34,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
         self.physicsWorld.contactDelegate = self
         
-        self.scoreLabel.position.x = (CGRectGetMaxX(self.screenRect) * 1.25) - self.scoreLabel.frame.size.width - 125
-        self.scoreLabel.position.y = CGRectGetMaxY(self.screenRect) * 1.52
+        self.scoreLabel.position.x = CGRectGetMaxX(self.screenRect) - self.scoreLabel.calculateAccumulatedFrame().width
+        self.scoreLabel.position.y = CGRectGetMaxY(self.screenRect) - self.scoreLabel.calculateAccumulatedFrame().height
         
         self.backgroundImage = SKSpriteNode(imageNamed: "Background")
         let xFactor: CGFloat = ((self.view?.bounds.width)! / self.backgroundImage.size.width)
@@ -57,8 +57,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let continuousScroll = SKAction.repeatActionForever(backgroundScroll)
         
         self.spaceship = SKSpriteNode(imageNamed: "Spaceship")
-        self.spaceship.xScale = 0.20
-        self.spaceship.yScale = 0.35
+        self.spaceship.xScale = 0.15
+        self.spaceship.yScale = 0.225
         self.spaceship.zRotation = -1.57
         self.spaceship.zPosition = 1
         let xRange = SKRange(lowerLimit: CGRectGetMinX(self.screenRect) + ((self.spaceship.size.width / 2) * 1.6), upperLimit: CGRectGetMaxX(self.screenRect))
@@ -71,7 +71,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.spaceship.physicsBody?.contactTestBitMask = SKNode.ContactCategory.Gate | SKNode.ContactCategory.Target // enemyCategory
         self.spaceship.physicsBody?.collisionBitMask = 0
         self.spaceship.physicsBody?.usesPreciseCollisionDetection = true
-        self.spaceship.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!) + 115, y: CGRectGetMidY((self.view?.bounds)!) + (self.spaceship.size.height * 2))
+        self.spaceship.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!) + 115, y: CGRectGetMidY((self.view?.bounds)!))
         
         enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
         enemyLauncher.launchEnemy()

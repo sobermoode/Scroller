@@ -13,7 +13,7 @@ class Gate: SKNode
     let gateTop = SKSpriteNode(imageNamed: "Enemy")
     let target = SKSpriteNode(color: UIColor.clearColor(), size: CGSizeZero)
     let gateBottom = SKSpriteNode(imageNamed: "Enemy")
-    let scaleFactor: CGFloat = 1.5
+    let scaleFactor: CGFloat = 0.75
     
     override init()
     {
@@ -22,7 +22,7 @@ class Gate: SKNode
         self.gateTop.xScale = self.scaleFactor
         self.gateTop.yScale = self.scaleFactor
         self.gateTop.position = CGPointZero
-        self.target.size = CGSize(width: self.gateTop.size.width, height: 95)
+        self.target.size = CGSize(width: self.gateTop.size.width, height: 85)
         self.target.position.x = self.gateTop.position.x
         self.target.position.y = self.gateTop.position.y - self.gateTop.size.height - 1
         self.gateBottom.xScale = self.scaleFactor

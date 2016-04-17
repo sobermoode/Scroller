@@ -25,8 +25,10 @@ class ScoreLabel: SKNode
         super.init()
         
         self.scoreText.fontName = "SFUIDisplay-Bold"
+        self.scoreText.fontSize = 20
         self.scoreTextContainer.addChild(self.scoreText)
         self.score.fontName = "SFUIDisplay-Bold"
+        self.score.fontSize = 20
         self.scoreContainer.addChild(self.score)
         self.scoreContainer.position.x = self.scoreTextContainer.position.x + self.scoreTextContainer.frame.width + 150
         
