@@ -11,7 +11,7 @@ import SpriteKit
 struct EnemyLauncher
 {
     let enemyImageName: String = "Enemy"
-    let enemyScaleFactor: CGFloat = 1.5
+    // let enemyScaleFactor: CGFloat = 1.5
     let maxInterval: NSTimeInterval = 3
     let scene: GameScene?
     let player: SKSpriteNode?
@@ -34,7 +34,7 @@ struct EnemyLauncher
         }
         
         let newGate = Gate()
-        let yRange = SKRange(lowerLimit: CGRectGetMinY(self.screenRect) + (newGate.halfHeightOfGateCap()), upperLimit: CGRectGetMaxY(self.screenRect) - (newGate.halfHeightOfGateCap()))
+        let yRange = SKRange(lowerLimit: CGRectGetMinY(self.screenRect) + (newGate.frame.size.height * 2), upperLimit: CGRectGetMaxY(self.screenRect) - (newGate.halfHeightOfGateCap()))
         let yConstraint = SKConstraint.positionY(yRange)
         newGate.constraints = [yConstraint]
         newGate.position.x = CGRectGetMaxX(self.screenRect) + newGate.calculateAccumulatedFrame().width

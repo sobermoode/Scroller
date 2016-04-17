@@ -73,8 +73,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.spaceship.physicsBody?.usesPreciseCollisionDetection = true
         self.spaceship.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!) + 115, y: CGRectGetMidY((self.view?.bounds)!))
         
-        // enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
-        // enemyLauncher.launchEnemy()
+        enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
+        enemyLauncher.launchEnemy()
         
         self.addChild(self.scoreLabel)
         self.addChild(self.backgroundImage)
@@ -140,10 +140,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.backgroundImage.speed = self.warpFactor
             self.backgroundImage2.speed = self.warpFactor
             
-//            if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
-//            {
-//                currentEnemy.speed = self.warpFactor
-//            }
+            if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
+            {
+                currentEnemy.speed = self.warpFactor
+            }
         }
         
         if self.backgroundImage.position.x < -self.backgroundImage.size.width
@@ -155,22 +155,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.backgroundImage2.position.x = self.backgroundImage.position.x + self.backgroundImage.size.width
         }
         
-//        if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
-//        {
-//            if currentEnemy.position.x <= -currentEnemy.size.width
-//            {
-//                currentEnemy.removeFromParent()
-//                self.enemyLauncher.removeCurrentEnemy()
-//            }
-//        }
-//        else
-//        {
-//            let now = NSDate()
-//            if now.timeIntervalSinceDate(self.enemyLauncher.lastLaunch) > self.enemyLauncher.maxInterval
-//            {
-//                self.enemyLauncher.launchEnemy()
-//            }
-//        }
+        if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
+        {
+            if currentEnemy.position.x <= -currentEnemy.size.width
+            {
+                currentEnemy.removeFromParent()
+                self.enemyLauncher.removeCurrentEnemy()
+            }
+        }
+        else
+        {
+            let now = NSDate()
+            if now.timeIntervalSinceDate(self.enemyLauncher.lastLaunch) > self.enemyLauncher.maxInterval
+            {
+                self.enemyLauncher.launchEnemy()
+            }
+        }
     }
     
     func didBeginContact(contact: SKPhysicsContact)
