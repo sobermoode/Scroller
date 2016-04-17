@@ -46,7 +46,7 @@ class Gate: SKNode
         self.gateBottom.physicsBody?.collisionBitMask = SKNode.ContactCategory.None
         self.gateBottom.physicsBody?.usesPreciseCollisionDetection = true
         
-        let gateMove = SKAction.moveToX((-self.frame.width * 1.5), duration: 7)
+        let gateMove = SKAction.moveToX(-self.frame.width - 2, duration: 7)
         let gateRemoval = SKAction.removeFromParent()
         let gateSequence = SKAction.sequence([gateMove, gateRemoval])
         self.runAction(gateSequence)
