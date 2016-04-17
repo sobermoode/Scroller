@@ -17,6 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var currentTouch: UITouch?
     var sustainedSpeed: Int = 0
     var enemyLauncher: EnemyLauncher!
+    let screenRect: CGRect = UIScreen.mainScreen().bounds
     
     override func didMoveToView(view: SKView)
     {
@@ -48,8 +49,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.spaceship.zRotation = -1.57
         self.spaceship.zPosition = 1
         // print("spaceship size: \(spaceship.size)")
-        let xRange = SKRange(lowerLimit: CGRectGetMinX((self.view?.bounds)!), upperLimit: CGRectGetMaxX((self.view?.bounds)!) * 3.2)
-        let yRange = SKRange(lowerLimit: CGRectGetMinY((self.view?.bounds)!), upperLimit: CGRectGetMaxY((self.view?.bounds)!) * 2.7)
+        let xRange = SKRange(lowerLimit: CGRectGetMinX(self.screenRect) + ((self.spaceship.size.width / 2) * 1.6), upperLimit: CGRectGetMaxX(self.screenRect))
+        let yRange = SKRange(lowerLimit: CGRectGetMinY(self.screenRect), upperLimit: CGRectGetMaxY(self.screenRect) * 2.7)
         let xConstraint = SKConstraint.positionX(xRange)
         let yConstraint = SKConstraint.positionY(yRange)
         self.spaceship.constraints = [xConstraint, yConstraint]

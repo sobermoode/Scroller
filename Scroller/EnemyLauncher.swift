@@ -6,7 +6,6 @@
 //  Copyright © 2016 AaronJ. All rights reserved.
 //
 
-// import Foundation
 import SpriteKit
 
 struct EnemyLauncher
@@ -36,6 +35,10 @@ struct EnemyLauncher
         }
         
         let newGate = Gate()
+        let yRange = SKRange(lowerLimit: CGRectGetMinY((self.scene?.view?.bounds)!) - newGate.frame.size.height, upperLimit: CGRectGetMaxY((self.scene?.view?.bounds)!) * 2.7)
+        print("yRange: \(yRange)")
+        let yConstraint = SKConstraint.positionY(yRange)
+        newGate.constraints = [yConstraint]
         newGate.position.x = CGRectGetMaxX((self.scene?.view?.bounds)!) * 1.5
         newGate.position.y = player.position.y
         scene.addChild(newGate)
