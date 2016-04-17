@@ -38,17 +38,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.scoreLabel.position.y = CGRectGetMaxY(self.screenRect) * 1.52
         
         self.backgroundImage = SKSpriteNode(imageNamed: "Background")
-        // let xFactor: CGFloat = ((self.view?.bounds.width)! / self.backgroundImage.size.width)
-        // let yFactor: CGFloat = ((self.view?.bounds.height)! / self.backgroundImage.size.height)
-        // self.backgroundImage.xScale =  3.2
-        // self.backgroundImage.yScale =  2.7
+        let xFactor: CGFloat = ((self.view?.bounds.width)! / self.backgroundImage.size.width)
+        let yFactor: CGFloat = ((self.view?.bounds.height)! / self.backgroundImage.size.height)
+        self.backgroundImage.xScale = xFactor
+        self.backgroundImage.yScale = yFactor
         self.backgroundImage.anchorPoint = CGPoint(x: 0, y: 0.0)
         self.backgroundImage.zPosition = 0
         self.backgroundImage.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!), y: CGRectGetMinY((self.view?.bounds)!))
         
         self.backgroundImage2 = SKSpriteNode(imageNamed: "Background")
-        // self.backgroundImage2.xScale = 3.2
-        // self.backgroundImage2.yScale = 2.7
+        self.backgroundImage2.xScale = xFactor
+        self.backgroundImage2.yScale = yFactor
         self.backgroundImage2.anchorPoint = CGPoint(x: 0, y: 0.0)
         self.backgroundImage2.zPosition = 0
         self.backgroundImage2.position = CGPoint(x: self.backgroundImage.size.width, y: self.backgroundImage.position.y)
