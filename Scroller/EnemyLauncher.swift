@@ -11,7 +11,6 @@ import SpriteKit
 struct EnemyLauncher
 {
     let enemyImageName: String = "Enemy"
-    // let enemyScaleFactor: CGFloat = 1.5
     let maxInterval: NSTimeInterval = 3
     let scene: GameScene?
     let player: SKSpriteNode?
