@@ -17,12 +17,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var currentTouch: UITouch?
     var sustainedSpeed: Int = 0
     var enemyLauncher: EnemyLauncher!
+    var scoreLabel = ScoreLabel()
     let screenRect: CGRect = UIScreen.mainScreen().bounds
     
     override func didMoveToView(view: SKView)
     {
         self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
         self.physicsWorld.contactDelegate = self
+        
+        self.scoreLabel.position.x = (CGRectGetMaxX(self.screenRect) * 1.25) - self.scoreLabel.frame.size.width - 125
+        self.scoreLabel.position.y = CGRectGetMaxY(self.screenRect) * 1.52
         
         self.backgroundImage = SKSpriteNode(imageNamed: "Background")
         // let xFactor: CGFloat = ((self.view?.bounds.width)! / self.backgroundImage.size.width)
@@ -63,9 +67,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
         enemyLauncher.launchEnemy()
         
-        self.addChild(backgroundImage)
-        self.addChild(backgroundImage2)
-        self.addChild(spaceship)
+        self.addChild(self.scoreLabel)
+        self.addChild(self.backgroundImage)
+        self.addChild(self.backgroundImage2)
+        self.addChild(self.spaceship)
         
         self.backgroundImage.runAction(continuousScroll)
         self.backgroundImage2.runAction(continuousScroll)
