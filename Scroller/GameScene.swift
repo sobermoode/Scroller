@@ -183,7 +183,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         else if gateObject.categoryBitMask == SKNode.ContactCategory.Target
         {
-            print("Score!!!")
+            let points = Int(floor(self.warpFactor))
+            
+            self.scoreLabel.increaseScore(points)
         }
     }
 }

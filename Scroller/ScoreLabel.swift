@@ -14,6 +14,7 @@ class ScoreLabel: SKNode
     let scoreContainer = SKNode()
     let scoreText = SKLabelNode(text: "Score:")
     let score = SKLabelNode(text: "0,000,000")
+    var total: Int = 0
     
     override init()
     {
@@ -33,5 +34,12 @@ class ScoreLabel: SKNode
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func increaseScore(value: Int)
+    {
+        self.total += value
+        
+        self.score.text = "\(self.total)"
     }
 }
