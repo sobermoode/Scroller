@@ -201,10 +201,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         else if gateObject.categoryBitMask == SKNode.ContactCategory.Target
         {
+            print("Hit the target!!!")
+            let target = gateObject.node
+            let gate = target?.parent as! Gate
+            print("Gate: \(gate)")
             let points = Int(floor(self.warpFactor))
             self.scoreLabel.increaseScore(points)
             
-            self.enemyLauncher.getCurrentGate()!.didHitGate = true
+            // print("Setting didHitGate on \(self.enemyLauncher.getCurrentGate()!.name)")
+            // self.enemyLauncher.getCurrentGate()!.didHitGate = true
+            gate.didHitGate = true
         }
     }
     

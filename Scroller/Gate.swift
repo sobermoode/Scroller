@@ -24,7 +24,7 @@ class Gate: SKNode
         
         self.gateTop.xScale = self.scaleFactor
         self.gateTop.yScale = self.scaleFactor
-        // self.gateTop.position = CGPointZero
+        self.gateTop.position = CGPointZero
         self.target.size = CGSize(width: self.gateTop.size.width, height: 85)
         self.target.position.x = self.gateTop.position.x
         self.target.position.y = self.gateTop.position.y - (self.gateTop.size.height * 1.75)
@@ -65,7 +65,7 @@ class Gate: SKNode
         self.gateBottom.physicsBody?.collisionBitMask = SKNode.ContactCategory.None
         self.gateBottom.physicsBody?.usesPreciseCollisionDetection = true
         
-        let gateMove = SKAction.moveToX(CGRectGetMinX(self.screenRect) - self.calculateAccumulatedFrame().width, duration: 7)
+        let gateMove = SKAction.moveToX(CGRectGetMinX(self.screenRect) - (self.calculateAccumulatedFrame().width * 2), duration: 7)
         let checkForMissedGate = SKAction.runBlock()
         {
 //            guard self.didHitGate else
@@ -81,6 +81,7 @@ class Gate: SKNode
 //            }
             if !self.didHitGate
             {
+                print("Oops, missed the gate!!!")
                 let gameScene = self.scene as! GameScene
                 let score = gameScene.scoreLabel.currentScore
                 
@@ -93,18 +94,28 @@ class Gate: SKNode
         let gateRemoval = SKAction.runBlock()
             {
                 print("gate.didHitGate: \(self.didHitGate)")
-                self.removeFromParent()
                 self.enemyLauncher.removeCurrentGate()
+                if let currentGate = self.enemyLauncher.getCurrentGate()
+                {
+                    print("Didn't set the current gate to nil.")
+                }
+                else
+                {
+                    print("The current gate is now nil.")
+                }
+                self.removeFromParent()
+                // SKAction.waitForDuration(0.5)
         }
-        let waitForInterval = SKAction.waitForDuration(5)
+        let waitForInterval = SKAction.waitForDuration(0.5)
         let nextGate = SKAction.runBlock()
         {
+            // SKAction.waitForDuration(0.5)
 //            let interval = UInt32(self.enemyLauncher.maxInterval)
 //            let randoInterval = NSTimeInterval(arc4random_uniform(interval) + 1)
 //            SKAction.waitForDuration(5)
             self.enemyLauncher.launchEnemy()
         }
-        let gateSequence = SKAction.sequence([gateMove, checkForMissedGate, waitForInterval, nextGate, gateRemoval])
+        let gateSequence = SKAction.sequence([gateMove, checkForMissedGate, nextGate, waitForInterval, gateRemoval])
         self.runAction(gateSequence)
         
         self.zPosition = 1

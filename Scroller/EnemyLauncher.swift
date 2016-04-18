@@ -18,6 +18,7 @@ struct EnemyLauncher
     var currentGate: Gate?
     // var lastLaunch = NSDate()
     let screenRect: CGRect = UIScreen.mainScreen().bounds
+    var totalGates: Int = 0
     
     init(scene: GameScene, player: SKSpriteNode)
     {
@@ -33,6 +34,10 @@ struct EnemyLauncher
         }
         
         let newGate = Gate()
+        
+        self.totalGates += 1
+        newGate.name = "Gate\(self.totalGates)"
+        
         let yRange = SKRange(lowerLimit: CGRectGetMinY(self.screenRect) + (newGate.calculateAccumulatedFrame().height), upperLimit: CGRectGetMaxY(self.screenRect) - (newGate.halfHeightOfGateCap()))
         let yConstraint = SKConstraint.positionY(yRange)
         newGate.constraints = [yConstraint]
@@ -47,6 +52,7 @@ struct EnemyLauncher
         
         scene.addChild(newGate)
         print("newGate.didHitGate: \(newGate.didHitGate)")
+        print("currentGate: \(self.getCurrentGate()!)")
         
         // self.lastLaunch = NSDate()
     }
