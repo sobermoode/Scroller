@@ -24,14 +24,14 @@ class Gate: SKNode
         
         self.gateTop.xScale = self.scaleFactor
         self.gateTop.yScale = self.scaleFactor
-        self.gateTop.position = CGPointZero
+        // self.gateTop.position = CGPointZero
         self.target.size = CGSize(width: self.gateTop.size.width, height: 85)
         self.target.position.x = self.gateTop.position.x
-        self.target.position.y = self.gateTop.position.y - (self.gateTop.size.height * 1.5) - 1
+        self.target.position.y = self.gateTop.position.y - (self.gateTop.size.height * 1.75)
         self.gateBottom.xScale = self.scaleFactor
         self.gateBottom.yScale = self.scaleFactor
         self.gateBottom.position.x = self.gateTop.position.x
-        self.gateBottom.position.y = self.target.position.y - self.target.size.height - 1
+        self.gateBottom.position.y = self.target.position.y - (self.target.size.height / 1.5)
         
         /*
         self.gateBottom.xScale = self.scaleFactor
