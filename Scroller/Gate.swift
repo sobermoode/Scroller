@@ -33,22 +33,6 @@ class Gate: SKNode
         self.gateBottom.position.x = self.gateTop.position.x
         self.gateBottom.position.y = self.target.position.y - (self.target.size.height / 1.5)
         
-        /*
-        self.gateBottom.xScale = self.scaleFactor
-        self.gateBottom.yScale = self.scaleFactor
-        self.gateBottom.position = CGPointZero
-        self.addChild(self.gateBottom)
-        self.target.size = CGSize(width: self.gateBottom.size.width, height: 85)
-        self.target.position.x = self.gateBottom.position.x
-        self.target.position.y = self.gateBottom.position.y + self.gateBottom.size.height + 1
-        self.addChild(self.target)
-        self.gateTop.xScale = self.scaleFactor
-        self.gateTop.yScale = self.scaleFactor
-        self.gateTop.position.x = self.gateBottom.position.x
-        self.gateTop.position.y = self.target.position.y + self.target.size.height + 1
-        self.addChild(self.gateTop)
-        */
-        
         self.gateTop.physicsBody = SKPhysicsBody(circleOfRadius: self.gateTop.size.width / 2)
         self.gateTop.physicsBody?.categoryBitMask = SKNode.ContactCategory.Gate
         self.gateTop.physicsBody?.contactTestBitMask = SKNode.ContactCategory.Spaceship
@@ -68,20 +52,8 @@ class Gate: SKNode
         let gateMove = SKAction.moveToX(CGRectGetMinX(self.screenRect) - (self.calculateAccumulatedFrame().width * 2), duration: 7)
         let checkForMissedGate = SKAction.runBlock()
         {
-//            guard self.didHitGate else
-//            {
-//                let gameScene = self.scene as! GameScene
-//                let score = gameScene.scoreLabel.currentScore
-//                
-//                let transition = SKTransition.flipVerticalWithDuration(0.5)
-//                let scene = GameOverScene(size: (self.scene?.size)!, score: score)
-//                self.scene?.view?.presentScene(scene, transition: transition)
-//                
-//                return
-//            }
             if !self.didHitGate
             {
-                print("Oops, missed the gate!!!")
                 let gameScene = self.scene as! GameScene
                 let score = gameScene.scoreLabel.currentScore
                 
@@ -90,32 +62,16 @@ class Gate: SKNode
                 self.scene?.view?.presentScene(scene, transition: transition)
             }
         }
-        // let gateRemoval = SKAction.removeFromParent()
-        let gateRemoval = SKAction.runBlock()
-            {
-                print("gate.didHitGate: \(self.didHitGate)")
-                self.enemyLauncher.removeCurrentGate()
-                if let currentGate = self.enemyLauncher.getCurrentGate()
-                {
-                    print("Didn't set the current gate to nil.")
-                }
-                else
-                {
-                    print("The current gate is now nil.")
-                }
-                self.removeFromParent()
-                // SKAction.waitForDuration(0.5)
-        }
-        let waitForInterval = SKAction.waitForDuration(0.5)
+        let gateRemoval = SKAction.removeFromParent()
+//        let gateRemoval = SKAction.runBlock()
+//        {
+//            self.removeFromParent()
+//        }
         let nextGate = SKAction.runBlock()
         {
-            // SKAction.waitForDuration(0.5)
-//            let interval = UInt32(self.enemyLauncher.maxInterval)
-//            let randoInterval = NSTimeInterval(arc4random_uniform(interval) + 1)
-//            SKAction.waitForDuration(5)
             self.enemyLauncher.launchEnemy()
         }
-        let gateSequence = SKAction.sequence([gateMove, checkForMissedGate, nextGate, waitForInterval, gateRemoval])
+        let gateSequence = SKAction.sequence([gateMove, checkForMissedGate, nextGate, gateRemoval])
         self.runAction(gateSequence)
         
         self.zPosition = 1

@@ -14,9 +14,6 @@ struct EnemyLauncher
     let maxInterval: NSTimeInterval = 5
     let scene: GameScene?
     let player: SKSpriteNode?
-    // var currentEnemy: SKSpriteNode?
-    var currentGate: Gate?
-    // var lastLaunch = NSDate()
     let screenRect: CGRect = UIScreen.mainScreen().bounds
     var totalGates: Int = 0
     
@@ -48,34 +45,7 @@ struct EnemyLauncher
         newGate.position.y = randoY
         
         newGate.enemyLauncher = self
-        self.currentGate = newGate
         
         scene.addChild(newGate)
-        print("newGate.didHitGate: \(newGate.didHitGate)")
-        print("currentGate: \(self.getCurrentGate()!)")
-        
-        // self.lastLaunch = NSDate()
     }
-    
-    func getCurrentGate() -> Gate?
-    {
-        return self.currentGate
-    }
-    
-    mutating func removeCurrentGate()
-    {
-        self.currentGate = nil
-    }
-    
-    /*
-    func getCurrentEnemy() -> SKSpriteNode?
-    {
-        return self.currentEnemy
-    }
-    
-    mutating func removeCurrentEnemy()
-    {
-        self.currentEnemy = nil
-    }
-    */
 }
