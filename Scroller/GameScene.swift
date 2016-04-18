@@ -140,9 +140,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.backgroundImage.speed = self.warpFactor
             self.backgroundImage2.speed = self.warpFactor
             
-            if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
+//            if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
+//            {
+//                currentEnemy.speed = self.warpFactor
+//            }
+            if let currentGate = self.enemyLauncher.getCurrentGate()
             {
-                currentEnemy.speed = self.warpFactor
+                currentGate.speed = warpFactor
             }
         }
         
@@ -155,22 +159,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.backgroundImage2.position.x = self.backgroundImage.position.x + self.backgroundImage.size.width
         }
         
-        if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
-        {
-            if currentEnemy.position.x <= -currentEnemy.size.width
-            {
-                currentEnemy.removeFromParent()
-                self.enemyLauncher.removeCurrentEnemy()
-            }
-        }
-        else
-        {
-            let now = NSDate()
-            if now.timeIntervalSinceDate(self.enemyLauncher.lastLaunch) > self.enemyLauncher.maxInterval
-            {
-                self.enemyLauncher.launchEnemy()
-            }
-        }
+//        if let currentEnemy = self.enemyLauncher.getCurrentEnemy()
+//        {
+//            if currentEnemy.position.x <= -currentEnemy.size.width
+//            {
+//                currentEnemy.removeFromParent()
+//                self.enemyLauncher.removeCurrentEnemy()
+//            }
+//        }
+//        if let currentGate = self.enemyLauncher.getCurrentGate()
+//        {
+//            
+//        }
+//        else
+//        {
+//            let now = NSDate()
+//            if now.timeIntervalSinceDate(self.enemyLauncher.lastLaunch) > self.enemyLauncher.maxInterval
+//            {
+//                self.enemyLauncher.launchEnemy()
+//            }
+//        }
     }
     
     func didBeginContact(contact: SKPhysicsContact)
@@ -194,8 +202,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if gateObject.categoryBitMask == SKNode.ContactCategory.Target
         {
             let points = Int(floor(self.warpFactor))
-            
             self.scoreLabel.increaseScore(points)
+            
+            self.enemyLauncher.getCurrentGate()!.didHitGate = true
         }
     }
     

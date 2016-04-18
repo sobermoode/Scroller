@@ -17,6 +17,10 @@ class ScoreLabel: SKNode
     var total: Int = 0
     var currentScore: Int
     {
+//        get
+//        {
+//            return total
+//        }
         return total
     }
     
@@ -48,4 +52,9 @@ class ScoreLabel: SKNode
         
         self.score.text = "\(self.total)"
     }
+    
+//    class func getCurrentScore() -> Int
+//    {
+//        return self.total
+//    }
 }

@@ -11,11 +11,12 @@ import SpriteKit
 struct EnemyLauncher
 {
     let enemyImageName: String = "Enemy"
-    let maxInterval: NSTimeInterval = 3
+    let maxInterval: NSTimeInterval = 5
     let scene: GameScene?
     let player: SKSpriteNode?
-    var currentEnemy: SKSpriteNode?
-    var lastLaunch = NSDate()
+    // var currentEnemy: SKSpriteNode?
+    var currentGate: Gate?
+    // var lastLaunch = NSDate()
     let screenRect: CGRect = UIScreen.mainScreen().bounds
     
     init(scene: GameScene, player: SKSpriteNode)
@@ -26,29 +27,41 @@ struct EnemyLauncher
     
     mutating func launchEnemy()
     {
-        guard let scene = self.scene,
-            let player = self.player else
+        guard let scene = self.scene else
         {
             return
         }
         
         let newGate = Gate()
-        print("newGate height: \(newGate.calculateAccumulatedFrame().height)")
         let yRange = SKRange(lowerLimit: CGRectGetMinY(self.screenRect) + (newGate.calculateAccumulatedFrame().height), upperLimit: CGRectGetMaxY(self.screenRect) - (newGate.halfHeightOfGateCap()))
-        print("yRange: \(yRange)")
         let yConstraint = SKConstraint.positionY(yRange)
         newGate.constraints = [yConstraint]
         
         newGate.position.x = CGRectGetMaxX(self.screenRect) + newGate.calculateAccumulatedFrame().width
-        let randoRange: UInt32 = UInt32(yRange.upperLimit) - UInt32(yRange.lowerLimit )
+        let randoRange: UInt32 = UInt32(yRange.upperLimit) - UInt32(yRange.lowerLimit)
         let randoY: CGFloat = CGFloat(arc4random_uniform(randoRange) + UInt32(yRange.lowerLimit))
-        newGate.position.y = randoY // player.position.y
+        newGate.position.y = randoY
+        
+        newGate.enemyLauncher = self
+        self.currentGate = newGate
         
         scene.addChild(newGate)
+        print("newGate.didHitGate: \(newGate.didHitGate)")
         
-        self.lastLaunch = NSDate()
+        // self.lastLaunch = NSDate()
     }
     
+    func getCurrentGate() -> Gate?
+    {
+        return self.currentGate
+    }
+    
+    mutating func removeCurrentGate()
+    {
+        self.currentGate = nil
+    }
+    
+    /*
     func getCurrentEnemy() -> SKSpriteNode?
     {
         return self.currentEnemy
@@ -58,4 +71,5 @@ struct EnemyLauncher
     {
         self.currentEnemy = nil
     }
+    */
 }
