@@ -66,6 +66,10 @@ class Gate: SKNode
         let hideGate = SKAction.runBlock()
         {
             self.hidden = true
+            self.gateTop.physicsBody?.categoryBitMask = SKNode.ContactCategory.None
+            self.gateTop.physicsBody?.contactTestBitMask = SKNode.ContactCategory.None
+            self.gateBottom.physicsBody?.categoryBitMask = SKNode.ContactCategory.None
+            self.gateBottom.physicsBody?.contactTestBitMask = SKNode.ContactCategory.None
         }
         let gateRemoval = SKAction.removeFromParent()
         let randoInterval = NSTimeInterval(arc4random_uniform(self.maxInterval) + 1)
