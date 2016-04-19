@@ -15,6 +15,7 @@ class Gate: SKNode
     let gateBottom = SKSpriteNode(imageNamed: "Enemy")
     let scaleFactor: CGFloat = 0.75
     var didHitGate: Bool = false
+    let maxInterval: UInt32 = 5
     let screenRect: CGRect = UIScreen.mainScreen().bounds
     var enemyLauncher: EnemyLauncher!
     
@@ -49,7 +50,7 @@ class Gate: SKNode
         self.gateBottom.physicsBody?.collisionBitMask = SKNode.ContactCategory.None
         self.gateBottom.physicsBody?.usesPreciseCollisionDetection = true
         
-        let gateMove = SKAction.moveToX(CGRectGetMinX(self.screenRect) - (self.calculateAccumulatedFrame().width * 2), duration: 7)
+        let gateMove = SKAction.moveToX(CGRectGetMinX(self.screenRect) - (self.calculateAccumulatedFrame().width), duration: 7)
         let checkForMissedGate = SKAction.runBlock()
         {
             if !self.didHitGate
@@ -62,16 +63,22 @@ class Gate: SKNode
                 self.scene?.view?.presentScene(scene, transition: transition)
             }
         }
+        let hideGate = SKAction.runBlock()
+        {
+            self.hidden = true
+        }
         let gateRemoval = SKAction.removeFromParent()
 //        let gateRemoval = SKAction.runBlock()
 //        {
 //            self.removeFromParent()
 //        }
+        let randoInterval = NSTimeInterval(arc4random_uniform(self.maxInterval) + 1)
+        let interval = SKAction.waitForDuration(randoInterval)
         let nextGate = SKAction.runBlock()
         {
             self.enemyLauncher.launchEnemy()
         }
-        let gateSequence = SKAction.sequence([gateMove, checkForMissedGate, nextGate, gateRemoval])
+        let gateSequence = SKAction.sequence([gateMove, hideGate, checkForMissedGate, interval, nextGate, gateRemoval])
         self.runAction(gateSequence)
         
         self.zPosition = 1

@@ -11,7 +11,6 @@ import SpriteKit
 struct EnemyLauncher
 {
     let enemyImageName: String = "Enemy"
-    let maxInterval: NSTimeInterval = 5
     let scene: GameScene?
     let player: SKSpriteNode?
     let screenRect: CGRect = UIScreen.mainScreen().bounds
