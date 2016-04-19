@@ -44,6 +44,7 @@ struct EnemyLauncher
         newGate.position.y = randoY
         
         newGate.enemyLauncher = self
+        self.scene?.currentGate = newGate
         
         scene.addChild(newGate)
     }

@@ -18,6 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var sustainedSpeed: Int = 0
     var enemyLauncher: EnemyLauncher!
     var scoreLabel = ScoreLabel()
+    var currentGate: Gate?
     let screenRect: CGRect = UIScreen.mainScreen().bounds
     
     override init(size: CGSize)
@@ -140,11 +141,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.backgroundImage.speed = self.warpFactor
             self.backgroundImage2.speed = self.warpFactor
             
-            let gateNumber = self.enemyLauncher.totalGates
-            let gateName = "Gate\(gateNumber)"
-            if let gate = self.childNodeWithName(gateName)
+            if let currentGate = self.currentGate
             {
-                gate.speed = warpFactor
+                currentGate.speed = self.warpFactor
             }
         }
         
@@ -177,9 +176,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         else if gateObject.categoryBitMask == SKNode.ContactCategory.Target
         {
-            let target = gateObject.node
-            let gate = target?.parent as! Gate
-            gate.didHitGate = true
+            self.currentGate?.didHitGate = true
             
             let points = Int(floor(self.warpFactor))
             self.scoreLabel.increaseScore(points)
