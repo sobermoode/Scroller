@@ -68,10 +68,6 @@ class Gate: SKNode
             self.hidden = true
         }
         let gateRemoval = SKAction.removeFromParent()
-//        let gateRemoval = SKAction.runBlock()
-//        {
-//            self.removeFromParent()
-//        }
         let randoInterval = NSTimeInterval(arc4random_uniform(self.maxInterval) + 1)
         let interval = SKAction.waitForDuration(randoInterval)
         let nextGate = SKAction.runBlock()
