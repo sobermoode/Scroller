@@ -120,14 +120,81 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     {
         if let currentTouch = self.currentTouch
         {
+            print("warpFactor: \(self.warpFactor)")
+            guard self.warpFactor <= 8 else
+            {
+                if let currentGate = self.currentGate
+                {
+                    currentGate.speed = self.warpFactor
+                }
+                
+                if self.backgroundImage.position.x < -self.backgroundImage.size.width
+                {
+                    self.backgroundImage.position.x = self.backgroundImage2.position.x + self.backgroundImage2.size.width
+                }
+                if self.backgroundImage2.position.x < -self.backgroundImage2.size.width
+                {
+                    self.backgroundImage2.position.x = self.backgroundImage.position.x + self.backgroundImage.size.width
+                }
+                
+                return
+            }
+            
             if currentTouch.force == currentTouch.maximumPossibleForce
             {
-                self.sustainedSpeed += 1
+                self.warpFactor += currentTouch.force * 0.003
                 
-                if self.sustainedSpeed > 125
+                self.backgroundImage.speed = self.warpFactor
+                self.backgroundImage2.speed = self.warpFactor
+                
+                if let currentGate = self.currentGate
                 {
-                    self.warpFactor = currentTouch.force * 3
+                    currentGate.speed = self.warpFactor
                 }
+                
+                if self.backgroundImage.position.x < -self.backgroundImage.size.width
+                {
+                    self.backgroundImage.position.x = self.backgroundImage2.position.x + self.backgroundImage2.size.width
+                }
+                if self.backgroundImage2.position.x < -self.backgroundImage2.size.width
+                {
+                    self.backgroundImage2.position.x = self.backgroundImage.position.x + self.backgroundImage.size.width
+                }
+//                if currentTouch.force > 6.65
+//                {
+//                    return
+//                }
+//                else
+//                {
+//                    self.warpFactor += currentTouch.force * 0.003
+//                }
+                
+//                self.sustainedSpeed += 1
+//                
+//                if self.sustainedSpeed > 125
+//                {
+//                    self.warpFactor *= 0.003
+//                    
+//                    self.backgroundImage.speed = self.warpFactor
+//                    self.backgroundImage2.speed = self.warpFactor
+//                    
+//                    if let currentGate = self.currentGate
+//                    {
+//                        currentGate.speed = self.warpFactor
+//                    }
+//                    
+//                    return
+//                }
+                
+//                self.backgroundImage.speed = self.warpFactor
+//                self.backgroundImage2.speed = self.warpFactor
+//                
+//                if let currentGate = self.currentGate
+//                {
+//                    currentGate.speed = self.warpFactor
+//                }
+                
+                return
             }
             else if currentTouch.force <= 1
             {
@@ -135,7 +202,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             else if currentTouch.force > 1
             {
-                self.warpFactor = currentTouch.force * 2
+                self.warpFactor += currentTouch.force * 0.003
             }
             
             self.backgroundImage.speed = self.warpFactor
