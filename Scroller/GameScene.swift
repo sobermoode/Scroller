@@ -74,6 +74,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 return
             }
             
+            self.spaceship.position.x += self.spaceship.size.width + 15
+            
             self.currentTouch = touch
         }
     }
@@ -82,7 +84,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     {
         if let currentTouch = self.currentTouch
         {
-            self.spaceship.position = currentTouch.locationInNode(self)
+            self.spaceship.position.x = currentTouch.locationInNode(self).x + self.spaceship.size.width + 15
+            self.spaceship.position.y = currentTouch.locationInNode(self).y
         }
     }
     
