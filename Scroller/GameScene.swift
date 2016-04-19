@@ -8,10 +8,8 @@
 
 import SpriteKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
-    
-    // var backgroundImage: SKSpriteNode!
-    // var backgroundImage2: SKSpriteNode!
+class GameScene: SKScene, SKPhysicsContactDelegate
+{
     var backgroundImage: BackgroundScroller!
     var spaceship: SKSpriteNode!
     var warpFactor: CGFloat = 1
@@ -41,27 +39,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.backgroundImage = BackgroundScroller(imageName: "Background", duration: 7, inScene: self)
         
-//        self.backgroundImage = SKSpriteNode(imageNamed: "Background")
-//        let xFactor: CGFloat = ((self.view?.bounds.width)! / self.backgroundImage.size.width)
-//        let yFactor: CGFloat = ((self.view?.bounds.height)! / self.backgroundImage.size.height)
-//        self.backgroundImage.xScale = xFactor
-//        self.backgroundImage.yScale = yFactor
-//        self.backgroundImage.anchorPoint = CGPoint(x: 0, y: 0.0)
-//        self.backgroundImage.zPosition = 0
-//        self.backgroundImage.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!), y: CGRectGetMinY((self.view?.bounds)!))
-//        
-//        self.backgroundImage2 = SKSpriteNode(imageNamed: "Background")
-//        self.backgroundImage2.xScale = xFactor
-//        self.backgroundImage2.yScale = yFactor
-//        self.backgroundImage2.anchorPoint = CGPoint(x: 0, y: 0.0)
-//        self.backgroundImage2.zPosition = 0
-//        self.backgroundImage2.position = CGPoint(x: self.backgroundImage.size.width, y: self.backgroundImage.position.y)
-//        
-//        let backgroundScroll = SKAction.moveByX(-self.backgroundImage.size.width * self.warpFactor, y: 0, duration: 7)
-//        let continuousScroll = SKAction.repeatActionForever(backgroundScroll)
-        
-        
-        
         self.spaceship = SKSpriteNode(imageNamed: "Spaceship")
         self.spaceship.xScale = 0.15
         self.spaceship.yScale = 0.225
@@ -83,14 +60,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemyLauncher.launchEnemy()
         
         self.addChild(self.scoreLabel)
-//        self.addChild(self.backgroundImage)
-//        self.addChild(self.backgroundImage2)
         self.addChild(self.spaceship)
         
         self.backgroundImage.beginScrolling()
-        
-        // self.backgroundImage.runAction(continuousScroll)
-        // self.backgroundImage2.runAction(continuousScroll)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -118,8 +90,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     {
         self.currentTouch = nil
         self.warpFactor = 1
-        // self.backgroundImage.speed = self.warpFactor
-        // self.backgroundImage2.speed = self.warpFactor
         self.backgroundImage.setSpeed(self.warpFactor)
         self.sustainedSpeed = 0
     }
@@ -136,15 +106,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 {
                     currentGate.speed = self.warpFactor
                 }
-                
-//                if self.backgroundImage.position.x < -self.backgroundImage.size.width
-//                {
-//                    self.backgroundImage.position.x = self.backgroundImage2.position.x + self.backgroundImage2.size.width
-//                }
-//                if self.backgroundImage2.position.x < -self.backgroundImage2.size.width
-//                {
-//                    self.backgroundImage2.position.x = self.backgroundImage.position.x + self.backgroundImage.size.width
-//                }
             }
             
             guard self.warpFactor <= 8 else
@@ -156,8 +117,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             {
                 self.warpFactor += currentTouch.force * 0.003
                 
-                // self.backgroundImage.speed = self.warpFactor
-                // self.backgroundImage2.speed = self.warpFactor
                 self.backgroundImage.setSpeed(self.warpFactor)
                 
                 return
@@ -169,6 +128,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             else if currentTouch.force > 1
             {
                 self.warpFactor += currentTouch.force * 0.003
+                
+                self.backgroundImage.setSpeed(self.warpFactor)
             }
         }
     }
