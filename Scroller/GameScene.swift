@@ -16,7 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     var currentTouch: UITouch?
     var sustainedSpeed: Int = 0
     var enemyLauncher: EnemyLauncher!
-    var scoreLabel = ScoreLabel()
+    var warpFactorLabel, gatesLabel, scoreLabel: ScoreLabel!
     var currentGate: Gate?
     let screenRect: CGRect = UIScreen.mainScreen().bounds
     
@@ -34,8 +34,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
         self.physicsWorld.contactDelegate = self
         
-        self.scoreLabel.position.x = CGRectGetMaxX(self.screenRect) - self.scoreLabel.calculateAccumulatedFrame().width
-        self.scoreLabel.position.y = CGRectGetMaxY(self.screenRect) - self.scoreLabel.calculateAccumulatedFrame().height
+        self.createLabels()
+        
+        // self.scoreLabel.position.x = CGRectGetMaxX(self.screenRect) - self.scoreLabel.calculateAccumulatedFrame().width
+        // self.scoreLabel.position.y = CGRectGetMaxY(self.screenRect) - self.scoreLabel.calculateAccumulatedFrame().height
         
         self.backgroundImage = BackgroundScroller(imageName: "Background", duration: 7, inScene: self)
         
@@ -59,10 +61,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
         enemyLauncher.launchEnemy()
         
-        self.addChild(self.scoreLabel)
+        // self.addChild(self.scoreLabel)
         self.addChild(self.spaceship)
         
         self.backgroundImage.beginScrolling()
+    }
+    
+    func createLabels()
+    {
+        let labelNode = SKNode()
+        
+        self.warpFactorLabel = ScoreLabel(title: "Warp Factor:")
+        self.warpFactorLabel.name = "warpFactorLabel"
+        self.warpFactorLabel.position = CGPointZero
+        labelNode.addChild(self.warpFactorLabel)
+        
+        self.gatesLabel = ScoreLabel(title: "Gates:")
+        self.gatesLabel.name = "gatesLabel"
+        self.gatesLabel.position.x = self.warpFactorLabel.position.x + self.warpFactorLabel.frame.width + 125
+        labelNode.addChild(self.gatesLabel)
+        
+        self.scoreLabel = ScoreLabel(title: "Score:")
+        self.scoreLabel.name = "scoreLabel"
+        self.scoreLabel.position.x = self.gatesLabel.position.x + self.gatesLabel.frame.width + 125
+        labelNode.addChild(self.scoreLabel)
+        
+        labelNode.position.x = CGRectGetMidX(self.screenRect) - (labelNode.frame.size.width) - 75
+        labelNode.position.y = CGRectGetMaxY(self.screenRect) - labelNode.frame.size.height - 25
+        
+        self.addChild(labelNode)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)

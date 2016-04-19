@@ -12,16 +12,18 @@ class ScoreLabel: SKNode
 {
     let scoreTextContainer = SKNode()
     let scoreContainer = SKNode()
-    let scoreText = SKLabelNode(text: "Score:")
-    let score = SKLabelNode(text: "0,000,000")
+    let scoreText, score: SKLabelNode
     var total: Int = 0
     var currentScore: Int
     {
         return total
     }
     
-    override init()
+    init(title: String)
     {
+        self.scoreText = SKLabelNode(text: title)
+        self.score = SKLabelNode(text: "\(self.total)")
+        
         super.init()
         
         self.scoreText.fontName = "SFUIDisplay-Bold"
