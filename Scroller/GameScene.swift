@@ -101,6 +101,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     {
         self.backgroundImage.checkBackgroundPosition()
         
+        self.scoreLabel.increaseScore(1 * Int(self.warpFactor))
+        
         if let currentTouch = self.currentTouch
         {
             defer
@@ -158,7 +160,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         {
             self.currentGate?.didHitGate = true
             
-            let points = Int(floor(self.warpFactor))
+            let points = 100 * Int(self.warpFactor)
             self.scoreLabel.increaseScore(points)
         }
     }
