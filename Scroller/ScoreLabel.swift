@@ -19,10 +19,10 @@ class ScoreLabel: SKNode
         return total
     }
     
-    init(title: String)
+    init(title: String, initialValue: Int = 0)
     {
         self.scoreText = SKLabelNode(text: title)
-        self.score = SKLabelNode(text: "\(self.total)")
+        self.score = SKLabelNode(text: "\(initialValue)")
         
         super.init()
         
@@ -32,7 +32,9 @@ class ScoreLabel: SKNode
         self.score.fontName = "SFUIDisplay-Bold"
         self.score.fontSize = 20
         self.scoreContainer.addChild(self.score)
-        self.scoreContainer.position.x = self.scoreTextContainer.position.x + self.scoreTextContainer.frame.width + 150
+        self.scoreContainer.position.x = self.scoreTextContainer.position.x + self.scoreTextContainer.frame.width + 100
+        
+        // self.score.text = "0"
         
         self.zPosition = 2
         

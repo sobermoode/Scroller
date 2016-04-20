@@ -78,18 +78,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         
         self.gatesLabel = ScoreLabel(title: "Gates:")
         self.gatesLabel.name = "gatesLabel"
-        self.gatesLabel.position.x = self.warpFactorLabel.position.x + self.warpFactorLabel.frame.width + 125
+        self.gatesLabel.position.x = self.warpFactorLabel.position.x + self.warpFactorLabel.frame.width + 175
         labelNode.addChild(self.gatesLabel)
         
-        self.scoreLabel = ScoreLabel(title: "Score:")
+        self.scoreLabel = ScoreLabel(title: "Score:", initialValue: 1000000)
         self.scoreLabel.name = "scoreLabel"
-        self.scoreLabel.position.x = self.gatesLabel.position.x + self.gatesLabel.frame.width + 125
+        self.scoreLabel.position.x = self.gatesLabel.position.x + self.gatesLabel.frame.width + 175
         labelNode.addChild(self.scoreLabel)
         
-        labelNode.position.x = CGRectGetMidX(self.screenRect) - (labelNode.frame.size.width) - 75
+        labelNode.position.x = CGRectGetMidX(self.screenRect) - (labelNode.frame.size.width) - 125
         labelNode.position.y = CGRectGetMaxY(self.screenRect) - labelNode.frame.size.height - 25
         
         self.addChild(labelNode)
+    }
+    
+    func updateScores()
+    {
+        self.scoreLabel.increaseScore(1 * Int(self.warpFactor))
+        
+        let roundedWarpFactor = round(self.warpFactor * 100) / 100
+        self.warpFactorLabel.score.text = "\(roundedWarpFactor)"
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -128,7 +136,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     {
         self.backgroundImage.checkBackgroundPosition()
         
-        self.scoreLabel.increaseScore(1 * Int(self.warpFactor))
+        // self.scoreLabel.increaseScore(1 * Int(self.warpFactor))
+        self.updateScores()
         
         if let currentTouch = self.currentTouch
         {
@@ -189,11 +198,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             
             let points = 100 * Int(self.warpFactor)
             self.scoreLabel.increaseScore(points)
+            
+            Gate.increaseTargetsHit()
+            self.gatesLabel.score.text = "\(Gate.targetsHit)"
         }
     }
     
     func gameOver()
     {
+        Gate.resetTargetsHit()
+        
         let transition = SKTransition.flipHorizontalWithDuration(0.5)
         let scene = GameOverScene(size: self.size, score: self.scoreLabel.currentScore)
         self.view?.presentScene(scene, transition: transition)

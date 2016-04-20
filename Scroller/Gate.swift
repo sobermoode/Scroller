@@ -15,6 +15,7 @@ class Gate: SKNode
     let gateBottom = SKSpriteNode(imageNamed: "Enemy")
     let scaleFactor: CGFloat = 0.75
     var didHitGate: Bool = false
+    static var targetsHit: Int = 0
     let maxInterval: UInt32 = 5
     let screenRect: CGRect = UIScreen.mainScreen().bounds
     var enemyLauncher: EnemyLauncher!
@@ -95,5 +96,15 @@ class Gate: SKNode
     func halfHeightOfGateCap() -> CGFloat
     {
         return self.gateTop.size.height / 2
+    }
+    
+    static func increaseTargetsHit()
+    {
+        Gate.targetsHit += 1
+    }
+    
+    static func resetTargetsHit()
+    {
+        Gate.targetsHit = 0
     }
 }
