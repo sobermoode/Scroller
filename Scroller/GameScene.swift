@@ -48,7 +48,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         let xConstraint = SKConstraint.positionX(xRange)
         let yConstraint = SKConstraint.positionY(yRange)
         self.spaceship.constraints = [xConstraint, yConstraint]
-        self.spaceship.physicsBody = SKPhysicsBody(rectangleOfSize: self.spaceship.size)
+        let spaceshipTexture = SKTexture(imageNamed: "Spaceship")
+        let spaceshipSize = CGSize(width: spaceshipTexture.size().width * 0.15, height: spaceshipTexture.size().height * 0.225)
+        self.spaceship.physicsBody = SKPhysicsBody(texture: spaceshipTexture, size: spaceshipSize)
         self.spaceship.physicsBody?.categoryBitMask = SKNode.ContactCategory.Spaceship
         self.spaceship.physicsBody?.contactTestBitMask = SKNode.ContactCategory.Gate | SKNode.ContactCategory.Target
         self.spaceship.physicsBody?.collisionBitMask = 0
