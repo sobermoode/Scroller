@@ -34,8 +34,6 @@ class ScoreLabel: SKNode
         self.scoreContainer.addChild(self.score)
         self.scoreContainer.position.x = self.scoreTextContainer.position.x + self.scoreTextContainer.frame.width + 100
         
-        // self.score.text = "0"
-        
         self.zPosition = 2
         
         self.addChild(self.scoreTextContainer)

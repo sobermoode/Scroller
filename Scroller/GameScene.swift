@@ -36,9 +36,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         
         self.createLabels()
         
-        // self.scoreLabel.position.x = CGRectGetMaxX(self.screenRect) - self.scoreLabel.calculateAccumulatedFrame().width
-        // self.scoreLabel.position.y = CGRectGetMaxY(self.screenRect) - self.scoreLabel.calculateAccumulatedFrame().height
-        
         self.backgroundImage = BackgroundScroller(imageName: "Background", duration: 7, inScene: self)
         
         self.spaceship = SKSpriteNode(imageNamed: "Spaceship")
@@ -61,7 +58,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
         enemyLauncher.launchEnemy()
         
-        // self.addChild(self.scoreLabel)
         self.addChild(self.spaceship)
         
         self.backgroundImage.beginScrolling()
@@ -136,7 +132,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     {
         self.backgroundImage.checkBackgroundPosition()
         
-        // self.scoreLabel.increaseScore(1 * Int(self.warpFactor))
         self.updateScores()
         
         if let currentTouch = self.currentTouch
