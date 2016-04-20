@@ -98,6 +98,11 @@ class Gate: SKNode
         return self.gateTop.size.height / 2
     }
     
+    func turnGateOff()
+    {
+        self.target.physicsBody?.categoryBitMask = SKNode.ContactCategory.None
+    }
+    
     static func increaseTargetsHit()
     {
         Gate.targetsHit += 1

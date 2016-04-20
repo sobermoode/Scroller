@@ -192,6 +192,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         else if gateObject.categoryBitMask == SKNode.ContactCategory.Target
         {
             self.currentGate?.didHitGate = true
+            self.currentGate?.turnGateOff()
             
             let points = 100 * Int(self.warpFactor)
             self.scoreLabel.increaseScore(points)
