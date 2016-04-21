@@ -14,7 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     var spaceship: SKSpriteNode!
     var warpFactor: CGFloat = 1
     var currentTouch: UITouch?
-    var sustainedSpeed: Int = 0
+    var lastForce: CGFloat = 0.0
     var enemyLauncher: EnemyLauncher!
     var warpFactorLabel, gatesLabel, scoreLabel: ScoreLabel!
     var currentGate: Gate?
@@ -127,7 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         self.currentTouch = nil
         self.warpFactor = 1
         self.backgroundImage.setSpeed(self.warpFactor)
-        self.sustainedSpeed = 0
+        self.lastForce = 0
     }
    
     override func update(currentTime: CFTimeInterval)
@@ -157,17 +157,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 
                 self.backgroundImage.setSpeed(self.warpFactor)
                 
+                self.lastForce = currentTouch.force
+                
                 return
             }
             else if currentTouch.force <= 1
             {
                 self.warpFactor = 1
+                
+                self.lastForce = 0
             }
-            else if currentTouch.force > 1
+            else
             {
-                self.warpFactor += currentTouch.force * 0.003
+                if currentTouch.force > self.lastForce
+                {
+                    if currentTouch.force - self.lastForce > 1
+                    {
+                        self.warpFactor += self.lastForce * 0.003
+                    }
+                    else
+                    {
+                        self.warpFactor += currentTouch.force * 0.003
+                    }
+                }
+                else if currentTouch.force < self.lastForce
+                {
+                    self.warpFactor -= self.lastForce * 0.003
+                }
                 
                 self.backgroundImage.setSpeed(self.warpFactor)
+                
+                self.lastForce = currentTouch.force
             }
         }
     }
