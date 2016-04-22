@@ -11,7 +11,6 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate
 {
     var backgroundImage: BackgroundScroller!
-    // var spaceship: SKSpriteNode!
     var spaceship: Spaceship!
     var warpFactor: CGFloat = 1
     var currentTouch: UITouch?
@@ -44,32 +43,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         self.spaceship.position = CGPoint(x: CGRectGetMinX(self.screenRect) + 115, y: CGRectGetMidY(self.screenRect))
         self.addChild(self.spaceship)
         
-        /*
-        self.spaceship = SKSpriteNode(imageNamed: "Spaceship")
-        self.spaceship.xScale = 0.15
-        self.spaceship.yScale = 0.225
-        self.spaceship.zRotation = -1.57
-        self.spaceship.zPosition = 1
-        let xRange = SKRange(lowerLimit: CGRectGetMinX(self.screenRect) + (self.spaceship.size.width / 2), upperLimit: CGRectGetMaxX(self.screenRect) - (self.spaceship.size.width / 2))
-        let yRange = SKRange(lowerLimit: CGRectGetMinY(self.screenRect) + (self.spaceship.size.height / 2), upperLimit: CGRectGetMaxY(self.screenRect) - (self.spaceship.size.height / 2))
-        let xConstraint = SKConstraint.positionX(xRange)
-        let yConstraint = SKConstraint.positionY(yRange)
-        self.spaceship.constraints = [xConstraint, yConstraint]
-        let spaceshipTexture = SKTexture(imageNamed: "Spaceship")
-        let spaceshipSize = CGSize(width: spaceshipTexture.size().width * 0.15, height: spaceshipTexture.size().height * 0.225)
-        self.spaceship.physicsBody = SKPhysicsBody(texture: spaceshipTexture, size: spaceshipSize)
-        self.spaceship.physicsBody?.categoryBitMask = SKNode.ContactCategory.Spaceship
-        self.spaceship.physicsBody?.contactTestBitMask = SKNode.ContactCategory.Gate | SKNode.ContactCategory.Target
-        self.spaceship.physicsBody?.collisionBitMask = 0
-        self.spaceship.physicsBody?.usesPreciseCollisionDetection = true
-        self.spaceship.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!) + 115, y: CGRectGetMidY((self.view?.bounds)!))
-        */
-        
-        // enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
         self.enemyLauncher = EnemyLauncher(scene: self, player: spaceship)
         self.enemyLauncher.launchEnemy()
-        
-        // self.addChild(self.spaceship)
         
         self.backgroundImage.beginScrolling()
     }
@@ -106,45 +81,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         let roundedWarpFactor = round(self.warpFactor * 100) / 100
         self.warpFactorLabel.score.text = "\(roundedWarpFactor)"
     }
-    
-    /*
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
-    {
-        if let touch = touches.first
-        {
-            // let spaceshipPoint = self.spaceship.convertPoint(touch.locationInNode(self), fromNode: self)
-            guard self.spaceship.containsPoint(touch.locationInNode(self.spaceship)) else
-            {
-                return
-            }
-            
-            self.spaceship.position.x += self.spaceship.frame.size.width + 15
-            
-            self.currentTouch = touch
-        }
-    }
-    
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?)
-    {
-        if let currentTouch = self.currentTouch
-        {
-            print("location: \(currentTouch.locationInNode(self))")
-            let spaceshipPoint = currentTouch.locationInNode(self.spaceship.sprite)
-            let gameScenePoint = self.convertPoint(spaceshipPoint, fromNode: self.spaceship.sprite)
-            // print("spaceshipPoint: \(spaceshipPoint), gameScenePoint: \(gameScenePoint)")
-            self.spaceship.position = gameScenePoint // currentTouch.locationInNode(self).x // currentTouch.locationInView(self).x + self.spaceship.frame.size.width + 15 // currentTouch.locationInNode(self).x + self.spaceship.frame.size.width + 15
-            // self.spaceship.position.y = self.spaceship.convertPoint(currentTouch.locationInNode(self), toNode: self.spaceship)) // currentTouch.locationInNode(self).y // currentTouch.locationInView(self).y // currentTouch.locationInNode(self).y
-        }
-    }
-    
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?)
-    {
-        self.currentTouch = nil
-        self.warpFactor = 1
-        self.backgroundImage.setSpeed(self.warpFactor)
-        self.lastForce = 0
-    }
-    */
    
     override func update(currentTime: CFTimeInterval)
     {
