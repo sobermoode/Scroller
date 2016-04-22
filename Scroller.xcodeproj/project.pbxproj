@@ -13,6 +13,7 @@
 		8146CF1F1CC30FE900CBE863 /* ScoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8146CF1E1CC30FE900CBE863 /* ScoreLabel.swift */; };
 		8146CF211CC323F900CBE863 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8146CF201CC323F900CBE863 /* GameOverScene.swift */; };
 		81539C0D1CBF413B00F0F172 /* EnemyLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81539C0C1CBF413B00F0F172 /* EnemyLauncher.swift */; };
+		819BF4D01CC88DA80013BC55 /* Spaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819BF4CF1CC88DA80013BC55 /* Spaceship.swift */; };
 		81C2C0871CBDFEB400010094 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2C0861CBDFEB400010094 /* AppDelegate.swift */; };
 		81C2C0891CBDFEB400010094 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 81C2C0881CBDFEB400010094 /* GameScene.sks */; };
 		81C2C08B1CBDFEB400010094 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2C08A1CBDFEB400010094 /* GameScene.swift */; };
@@ -29,6 +30,7 @@
 		8146CF1E1CC30FE900CBE863 /* ScoreLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreLabel.swift; sourceTree = "<group>"; };
 		8146CF201CC323F900CBE863 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		81539C0C1CBF413B00F0F172 /* EnemyLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyLauncher.swift; sourceTree = "<group>"; };
+		819BF4CF1CC88DA80013BC55 /* Spaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spaceship.swift; sourceTree = "<group>"; };
 		81C2C0831CBDFEB400010094 /* Scroller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scroller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C2C0861CBDFEB400010094 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81C2C0881CBDFEB400010094 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				81C2C0881CBDFEB400010094 /* GameScene.sks */,
 				81C2C08A1CBDFEB400010094 /* GameScene.swift */,
 				8146CF201CC323F900CBE863 /* GameOverScene.swift */,
+				819BF4CF1CC88DA80013BC55 /* Spaceship.swift */,
 				8121887B1CC5F85E00CC2F1F /* BackgroundScroller.swift */,
 				81539C0C1CBF413B00F0F172 /* EnemyLauncher.swift */,
 				8146CF1A1CC1C35100CBE863 /* Gate.swift */,
@@ -165,6 +168,7 @@
 				8146CF1B1CC1C35100CBE863 /* Gate.swift in Sources */,
 				8146CF211CC323F900CBE863 /* GameOverScene.swift in Sources */,
 				81C2C08D1CBDFEB400010094 /* GameViewController.swift in Sources */,
+				819BF4D01CC88DA80013BC55 /* Spaceship.swift in Sources */,
 				8146CF1F1CC30FE900CBE863 /* ScoreLabel.swift in Sources */,
 				81539C0D1CBF413B00F0F172 /* EnemyLauncher.swift in Sources */,
 				8121887C1CC5F85E00CC2F1F /* BackgroundScroller.swift in Sources */,

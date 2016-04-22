@@ -11,7 +11,8 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate
 {
     var backgroundImage: BackgroundScroller!
-    var spaceship: SKSpriteNode!
+    // var spaceship: SKSpriteNode!
+    var spaceship: Spaceship!
     var warpFactor: CGFloat = 1
     var currentTouch: UITouch?
     var lastForce: CGFloat = 0.0
@@ -38,6 +39,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         
         self.backgroundImage = BackgroundScroller(imageName: "Background", duration: 7, inScene: self)
         
+        self.spaceship = Spaceship(scene: self)
+        self.spaceship.zPosition = 1
+        self.spaceship.position = CGPoint(x: CGRectGetMinX(self.screenRect) + 115, y: CGRectGetMidY(self.screenRect))
+        self.addChild(self.spaceship)
+        
+        /*
         self.spaceship = SKSpriteNode(imageNamed: "Spaceship")
         self.spaceship.xScale = 0.15
         self.spaceship.yScale = 0.225
@@ -56,11 +63,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         self.spaceship.physicsBody?.collisionBitMask = 0
         self.spaceship.physicsBody?.usesPreciseCollisionDetection = true
         self.spaceship.position = CGPoint(x: CGRectGetMinX((self.view?.bounds)!) + 115, y: CGRectGetMidY((self.view?.bounds)!))
+        */
         
-        enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
-        enemyLauncher.launchEnemy()
+        // enemyLauncher = EnemyLauncher(scene: self, player: self.spaceship)
+        self.enemyLauncher = EnemyLauncher(scene: self, player: spaceship)
+        self.enemyLauncher.launchEnemy()
         
-        self.addChild(self.spaceship)
+        // self.addChild(self.spaceship)
         
         self.backgroundImage.beginScrolling()
     }
@@ -98,16 +107,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         self.warpFactorLabel.score.text = "\(roundedWarpFactor)"
     }
     
+    /*
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
     {
         if let touch = touches.first
         {
-            guard self.spaceship.containsPoint(touch.locationInNode(self)) else
+            // let spaceshipPoint = self.spaceship.convertPoint(touch.locationInNode(self), fromNode: self)
+            guard self.spaceship.containsPoint(touch.locationInNode(self.spaceship)) else
             {
                 return
             }
             
-            self.spaceship.position.x += self.spaceship.size.width + 15
+            self.spaceship.position.x += self.spaceship.frame.size.width + 15
             
             self.currentTouch = touch
         }
@@ -117,8 +128,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     {
         if let currentTouch = self.currentTouch
         {
-            self.spaceship.position.x = currentTouch.locationInNode(self).x + self.spaceship.size.width + 15
-            self.spaceship.position.y = currentTouch.locationInNode(self).y
+            print("location: \(currentTouch.locationInNode(self))")
+            let spaceshipPoint = currentTouch.locationInNode(self.spaceship.sprite)
+            let gameScenePoint = self.convertPoint(spaceshipPoint, fromNode: self.spaceship.sprite)
+            // print("spaceshipPoint: \(spaceshipPoint), gameScenePoint: \(gameScenePoint)")
+            self.spaceship.position = gameScenePoint // currentTouch.locationInNode(self).x // currentTouch.locationInView(self).x + self.spaceship.frame.size.width + 15 // currentTouch.locationInNode(self).x + self.spaceship.frame.size.width + 15
+            // self.spaceship.position.y = self.spaceship.convertPoint(currentTouch.locationInNode(self), toNode: self.spaceship)) // currentTouch.locationInNode(self).y // currentTouch.locationInView(self).y // currentTouch.locationInNode(self).y
         }
     }
     
@@ -129,6 +144,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         self.backgroundImage.setSpeed(self.warpFactor)
         self.lastForce = 0
     }
+    */
    
     override func update(currentTime: CFTimeInterval)
     {
@@ -136,7 +152,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         
         self.updateScores()
         
-        if let currentTouch = self.currentTouch
+        if let currentTouch = self.spaceship.currentTouch
         {
             defer
             {
