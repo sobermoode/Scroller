@@ -27,20 +27,10 @@ class Spaceship : SKNode
         
         let spaceshipTexture = SKTexture(imageNamed: "Spaceship")
         sprite = SKSpriteNode(texture: spaceshipTexture)
-        
-        // sprite.anchorPoint = CGPointZero
         sprite.xScale = self.xScaleFactor
         sprite.yScale = self.yScaleFactor
         sprite.zRotation = self.rotation
         sprite.zPosition = 1
-        
-        /*
-        let xRange = SKRange(lowerLimit: CGRectGetMinX(self.screenRect) + (sprite.size.width / 2), upperLimit: CGRectGetMaxX(self.screenRect) - (sprite.size.width / 2))
-        let yRange = SKRange(lowerLimit: CGRectGetMinY(self.screenRect) + (sprite.size.height / 2), upperLimit: CGRectGetMaxY(self.screenRect) - (sprite.size.height / 2))
-        let xConstraint = SKConstraint.positionX(xRange)
-        let yConstraint = SKConstraint.positionY(yRange)
-        sprite.constraints = [xConstraint, yConstraint]
-        */
         
         let spaceshipSize = CGSize(width: spaceshipTexture.size().width * self.xScaleFactor, height: spaceshipTexture.size().height * self.yScaleFactor)
         sprite.physicsBody = SKPhysicsBody(texture: spaceshipTexture, size: spaceshipSize)
@@ -65,24 +55,6 @@ class Spaceship : SKNode
                 return
             }
             
-            /*
-            let spaceshipPoint = touch.locationInNode(self.sprite)
-            let gameScenePoint = self.sprite.convertPoint(spaceshipPoint, toNode: self.scene!)
-            self.position = gameScenePoint
-            */
-            
-            // spaceshipPoint.x += self.frame.size.width + 25
-            // gameScenePoint.x += 25
-            // gameScenePoint.y -= self.frame.size.height
-            
-            
-//            var spaceshipTail = CGRectGetMinX(self.frame)
-//            spaceshipTail += self.frame.size.width * 2
-//            let spaceshipMidY = CGRectGetMidY(self.sprite.frame)
-//            let shiftedPoint = CGPoint(x: spaceshipTail, y: spaceshipMidY - (self.sprite.size.height * 2))
-//            let gameScenePoint = self.sprite.convertPoint(shiftedPoint, toNode: self.scene!)
-//            self.position = gameScenePoint
-            
             self.currentTouch = touch
         }
     }
@@ -92,8 +64,7 @@ class Spaceship : SKNode
         if let currentTouch = self.currentTouch
         {
             let spaceshipPoint = currentTouch.locationInNode(self.sprite)
-            var gameScenePoint = self.sprite.convertPoint(spaceshipPoint, toNode: self.scene!)
-            // gameScenePoint.x += 25
+            let gameScenePoint = self.sprite.convertPoint(spaceshipPoint, toNode: self.scene!)
             self.position = gameScenePoint
         }
     }
