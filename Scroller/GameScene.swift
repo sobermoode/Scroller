@@ -43,7 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         self.spaceship.position = CGPoint(x: CGRectGetMinX(self.screenRect) + 115, y: CGRectGetMidY(self.screenRect))
         self.addChild(self.spaceship)
         
-        self.enemyLauncher = EnemyLauncher(scene: self, player: spaceship)
+        self.enemyLauncher = EnemyLauncher(scene: self)
         self.enemyLauncher.launchEnemy()
         
         self.backgroundImage.beginScrolling()
@@ -96,6 +96,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 {
                     currentGate.speed = self.warpFactor
                 }
+                
+                self.backgroundImage.setSpeed(self.warpFactor)
             }
             
             guard self.warpFactor <= 8 else
@@ -136,8 +138,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 {
                     self.warpFactor -= self.lastForce * 0.003
                 }
-                
-                self.backgroundImage.setSpeed(self.warpFactor)
                 
                 self.lastForce = currentTouch.force
             }

@@ -12,21 +12,12 @@ struct EnemyLauncher
 {
     let enemyImageName: String = "Enemy"
     let scene: GameScene?
-    // let player: SKSpriteNode?
-    let player: Spaceship?
     let screenRect: CGRect = UIScreen.mainScreen().bounds
     var totalGates: Int = 0
     
-//    init(scene: GameScene, player: SKSpriteNode)
-//    {
-//        self.scene = scene
-//        self.player = player
-//    }
-    
-    init(scene: GameScene, player: Spaceship)
+    init(scene: GameScene)
     {
         self.scene = scene
-        self.player = player
     }
     
     mutating func launchEnemy()
