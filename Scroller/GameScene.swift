@@ -100,7 +100,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 self.backgroundImage.setSpeed(self.warpFactor)
             }
             
-            guard self.warpFactor <= 8 else
+            guard self.warpFactor <= 8 || self.warpFactor >= 1 else
             {                
                 return
             }
@@ -120,6 +120,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 self.warpFactor = 1
                 
                 self.lastForce = 0
+                
+                return
             }
             else
             {
@@ -136,6 +138,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 }
                 else if currentTouch.force < self.lastForce
                 {
+                    guard (self.warpFactor - (self.lastForce * 0.003) >= 1.0) else
+                    {
+                        return
+                    }
+                    
                     self.warpFactor -= self.lastForce * 0.003
                 }
                 
