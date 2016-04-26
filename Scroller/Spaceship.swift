@@ -15,6 +15,7 @@ class Spaceship : SKNode
     let xScaleFactor: CGFloat = 0.15
     let yScaleFactor: CGFloat = 0.225
     let rotation: CGFloat = -1.57
+    var controlPoint: CGPoint!
     let screenRect: CGRect = UIScreen.mainScreen().bounds
     var currentTouch: UITouch?
     
@@ -25,8 +26,12 @@ class Spaceship : SKNode
         self.userInteractionEnabled = true
         self.name = "Spaceship"
         
+        self.physicsBody?.categoryBitMask = SKNode.ContactCategory.None
+        
         let spaceshipTexture = SKTexture(imageNamed: "Spaceship")
         sprite = SKSpriteNode(texture: spaceshipTexture)
+        sprite.anchorPoint = CGPointZero
+        sprite.position = CGPointZero
         sprite.xScale = self.xScaleFactor
         sprite.yScale = self.yScaleFactor
         sprite.zRotation = self.rotation
@@ -39,7 +44,17 @@ class Spaceship : SKNode
         sprite.physicsBody?.collisionBitMask = 0
         sprite.physicsBody?.usesPreciseCollisionDetection = true
         
-        self.addChild(sprite)
+        let spacerSprite = SKSpriteNode(color: UIColor.blueColor(), size: self.sprite.size)
+        spacerSprite.anchorPoint = CGPointZero
+        spacerSprite.zRotation = self.rotation
+        spacerSprite.position = CGPoint(x: self.sprite.position.x + self.sprite.size.width, y: CGRectGetMinY(self.frame))
+        spacerSprite.zPosition = 1
+        spacerSprite.physicsBody?.categoryBitMask = SKNode.ContactCategory.None
+        spacerSprite.physicsBody?.contactTestBitMask = SKNode.ContactCategory.None
+        spacerSprite.physicsBody?.collisionBitMask = SKNode.ContactCategory.None
+        
+        self.addChild(self.sprite)
+        self.addChild(spacerSprite)
     }
     
     required init?(coder aDecoder: NSCoder) {

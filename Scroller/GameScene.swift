@@ -159,10 +159,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         
         if gateObject.categoryBitMask == SKNode.ContactCategory.Gate
         {
+            print("Hit the gate!!!")
             self.gameOver()
         }
         else if gateObject.categoryBitMask == SKNode.ContactCategory.Target
         {
+            print("Hit the target!!!")
             self.currentGate?.didHitGate = true
             self.currentGate?.turnGateOff()
             
